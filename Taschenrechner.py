@@ -1,12 +1,20 @@
 import tkinter as tk
+from tkinter import ttk
 
 root = tk.Tk()
+root.title("Taschenrechner")
+root.geometry("400x600")
+root.minsize(width=250,height=300)
 
-label1 = tk.Label(root, text="Tascherechner")
+label1 = ttk.Label(root)
 label1.pack()
+label1.configure(text="In Arbeit...(1)")
+
+label2 = ttk.Label(root, text="In Arbeit...(2)")
+label2.pack()
 
 root.mainloop()
-print("Willkommen zum Taschenrechner")
+print("Du hast den Taschenrechner geschlossen")
 
 
 
