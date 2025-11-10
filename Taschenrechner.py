@@ -1,3 +1,21 @@
+import tkinter as tk
+
+root = tk.Tk()
+
+label1 = tk.Label(root, text="Tascherechner")
+label1.pack()
+
+root.mainloop()
+print("Willkommen zum Taschenrechner")
+
+
+
+
+
+
+
+
+
 def plus(x,y):
     ergebnis = x + y
     return ergebnis
