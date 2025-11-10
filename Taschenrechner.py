@@ -1,18 +1,18 @@
 def plus(x,y):
-    Ergebnis = x + y
-    return Ergebnis
+    ergebnis = x + y
+    return ergebnis
 
 def minus(x,y):
-    Ergebnis = x - y
-    return Ergebnis
+    ergebnis = x - y
+    return ergebnis
 
 def mal(x,y):
-    Ergebnis = x * y
-    return Ergebnis
+    ergebnis = x * y
+    return ergebnis
 
 def geteilt(x,y):
-    Ergebnis = x / y
-    return Ergebnis
+    ergebnis = x / y
+    return ergebnis
 
 x = int(input())
 print("Die erste Zahk ist:", x)
@@ -25,17 +25,17 @@ print("Für Addition tippe 'plus' für Subtraktion 'minus' für Multiplikation '
 rechnug = str(input())
 
 if rechnug == "plus":
-    plusErgebnis = plus(x,y)
-    print("Das Ergebnis ist:", plusErgebnis)
+    plus_ergebnis = plus(x,y)
+    print("Das Ergebnis ist:", plus_ergebnis)
 
 elif rechnug == "minus":
-    minusErgebnis = minus(x,y)
-    print("Das Ergebnis ist:", minusErgebnis)
+    minus_ergebnis = minus(x,y)
+    print("Das Ergebnis ist:", minus_ergebnis)
 
 elif rechnug == "mal":
-    malErgebnis = mal(x,y)
-    print("Das Ergebnis ist:", malErgebnis)
+    mal_ergebnis = mal(x,y)
+    print("Das Ergebnis ist:", mal_ergebnis)
 
 elif rechnug == "geteilt":
-    geteiltErgebnis = geteilt(x,y)
-    print("Das Ergebnis ist:", geteiltErgebnis)
+    geteilt_ergebnis = geteilt(x,y)
+    print("Das Ergebnis ist:", geteilt_ergebnis)
