@@ -8,13 +8,67 @@ root.minsize(width=250,height=300)
 
 label1 = ttk.Label(root)
 label1.pack()
-label1.configure(text="In Arbeit...(1)")
+text1 = tk.StringVar()
+text1.set("Hallo")
+label1.configure(textvariable=text1)
 
-label2 = ttk.Label(root, text="In Arbeit...(2)")
+label2 = ttk.Label(root)
 label2.pack()
+text2 = tk.StringVar()
+text2.set("Hallo2")
+label2.configure(textvariable=text2)
+
+
+text2.set(text2.get() + " " + text2.get())
+
+
+
+
+
+
+
+
+
+lzahl1_int = tk.IntVar()
+lzahl1_int.set(1)
+lzahl1 = ttk.Label(root, textvariable=lzahl1_int)
+lzahl1.pack()
+lzahl1.configure(relief="solid")
+
+
+button1 = ttk.Button(
+    root, 
+    text="Hallo", 
+    command=lambda: lzahl1_int.set(lzahl1_int.get()+1)
+    )
+button1.pack()
+
+
+
+
+
+
 
 root.mainloop()
 print("Du hast den Taschenrechner geschlossen")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
