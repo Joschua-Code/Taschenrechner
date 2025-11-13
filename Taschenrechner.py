@@ -2,9 +2,11 @@ import tkinter as tk
 from tkinter import ttk
 import sys
 
+
+#Window and Frames
 window = tk.Tk()
 window.title("Taschenrechner")
-window.geometry("400x550")
+window.geometry("400x225")
 window.minsize(width=250,height=300)
 window.configure(padx= 50, pady=50)
 #window.grid_columnconfigure((0, 1, 2, 3, 4), weight=1, uniform="cols")
@@ -13,19 +15,19 @@ ergebnisfenster = tk.Frame(window)
 ergebnisfenster.grid(row=0, column=0, columnspan=4, sticky="ew")
 ergebnisfenster.grid_columnconfigure((0,1,2,3,4), weight=1, uniform="cols")
 
-#Taschenrechner
-
-#Ergebnisfenster (Zahl1 - Operator - Zahl2 - Ergebnis)
-#Erste Zahl
-zahl1 = tk.IntVar()
-zahl1.set(1)
-
-zahl1_label = ttk.Label(ergebnisfenster)
-zahl1_label.grid(row=0, column=0)
-zahl1_label.configure(textvariable=zahl1)
 
 
-#Operator
+#Resultwindow (Number 1 - Operator - Number 2 - Result)
+
+
+number1 = tk.IntVar()
+number1.set(1)
+
+number1_label = ttk.Label(ergebnisfenster)
+number1_label.grid(row=0, column=0)
+number1_label.configure(textvariable=number1)
+
+
 operator = tk.StringVar()
 operator.set("+")
 
@@ -34,122 +36,191 @@ operator_label.grid(row=0, column=1)
 operator_label.configure(textvariable=operator)
 
 
-#Zweite Zahl
-zahl2 = tk.IntVar()
-zahl2.set(2)
+number2 = tk.IntVar()
+number2.set(2)
 
-zahl2_label = ttk.Label(ergebnisfenster)
-zahl2_label.grid(row=0, column=2)
-zahl2_label.configure(textvariable=zahl2)
-
-
-#Gleichzeichenlabel
-gleichzeichen_label = ttk.Label(ergebnisfenster)
-gleichzeichen_label.grid(row=0, column=3)
-
-gleichzeichen = tk.StringVar()
-gleichzeichen.set("=")
-gleichzeichen_label.configure(textvariable=gleichzeichen)
-
-#Ergebnislabel
-ergebnis = tk.IntVar()
-ergebnis.set(3)
-
-ergebnis_label = ttk.Label(ergebnisfenster)
-ergebnis_label.grid(row=0, column=4)
-ergebnis_label.configure(textvariable=ergebnis)
+number2_label = ttk.Label(ergebnisfenster)
+number2_label.grid(row=0, column=2)
+number2_label.configure(textvariable=number2)
 
 
-#Abstandshalter
-ergebnis_label = ttk.Label(window)
-ergebnis_label.grid(row=1, column=0)
-ergebnis_label.configure(textvariable="")
+equal_label = ttk.Label(ergebnisfenster)
+equal_label.grid(row=0, column=3)
+
+equal = tk.StringVar()
+equal.set("=")
+equal_label.configure(textvariable=equal)
 
 
+result = tk.IntVar()
+result.set(3)
+
+result_label = ttk.Label(ergebnisfenster)
+result_label.grid(row=0, column=4)
+result_label.configure(textvariable=result)
 
 
-#ClearButton
-clear = ttk.Button(
+distance_holder_label = ttk.Label(window)
+distance_holder_label.grid(row=1, column=0)
+distance_holder_label.configure(textvariable="")
+
+
+#It follows: Clear / Backspace / History / Operator and Number Buttons
+
+clear_button = ttk.Button(
     window, 
     text="C", 
     #command=lambda: lzahl1_int.set(lzahl1_int.get()+1)
     )
-clear.grid(row=3, column=0)
+clear_button.grid(row=3, column=0)
 
-#back_button
-back = ttk.Button(
+
+back_button = ttk.Button(
     window, 
     text="⌫", 
     #command=lambda: lzahl1_int.set(lzahl1_int.get()+1)
     )
-back.grid(row=3, column=1)
+back_button.grid(row=3, column=1)
 
 
-#History button
-history = ttk.Button(
+history_button = ttk.Button(
     window, 
     text="☰", 
     #command=lambda: lzahl1_int.set(lzahl1_int.get()+1)
     )
-history.grid(row=3, column=2)
+history_button.grid(row=3, column=2)
 
 
-#Divide button
-help = ttk.Button(
+divide_button = ttk.Button(
     window, 
-    text="?", 
+    text="/", 
     #command=lambda: lzahl1_int.set(lzahl1_int.get()+1)
     )
-help.grid(row=3, column=3)
+divide_button.grid(row=3, column=3)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-"""
-label1 = ttk.Label(window)
-label1.pack()
-text1 = tk.StringVar()
-text1.set("Hallo")
-label1.configure(textvariable=text1)
-
-label2 = ttk.Label(window)
-label2.pack()
-text2 = tk.StringVar()
-text2.set("Hallo2")
-label2.configure(textvariable=text2)
-
-
-text2.set(text2.get() + " " + text2.get())
-
-
-lzahl1_int = tk.IntVar()
-lzahl1_int.set(1000)
-
-lzahl1 = ttk.Label(window, textvariable=lzahl1_int)
-lzahl1.pack()
-lzahl1.configure(relief="solid")
-
-
-button1 = ttk.Button(
+seven_button = ttk.Button(
     window, 
-    text="Hallo", 
-    command=lambda: lzahl1_int.set(lzahl1_int.get()+1)
+    text=7, 
+    #command=lambda: lzahl1_int.set(lzahl1_int.get()+1)
     )
-button1.pack()
-"""
+seven_button.grid(row=4, column=0)
+
+
+eight_button = ttk.Button(
+    window, 
+    text=8, 
+    #command=lambda: lzahl1_int.set(lzahl1_int.get()+1)
+    )
+eight_button.grid(row=4, column=1)
+
+
+nine_button = ttk.Button(
+    window,
+    text=9,
+    #command=lambda: lzahl1_int.set(lzahl1_int.get()+1)
+)
+nine_button.grid(row=4, column=2)
+
+
+multiplication_button = ttk.Button(
+    window, 
+    text="x", 
+    #command=lambda: lzahl1_int.set(lzahl1_int.get()+1)
+    )
+multiplication_button.grid(row=4, column=3)
+
+
+four_button = ttk.Button(
+    window,
+    text=4,
+    #command=lambda: lzahl1_int.set(lzahl1_int.get()+1)
+)
+four_button.grid(row=5, column=0)
+
+
+five_button = ttk.Button(
+    window,
+    text=5,
+    #command=lambda: lzahl1_int.set(lzahl1_int.get()+1)
+)
+five_button.grid(row=5, column=1)
+
+
+six_button = ttk.Button(
+    window,
+    text=6,
+    #command=lambda: lzahl1_int.set(lzahl1_int.get()+1)
+)
+six_button.grid(row=5, column=2)
+
+
+minus_button = ttk.Button(
+    window,
+    text="-",
+    #command=lambda: lzahl1_int.set(lzahl1_int.get()+1)
+)
+minus_button.grid(row=5, column=3)
+
+
+one_button = ttk.Button(
+    window,
+    text=1,
+    #command=lambda: lzahl1_int.set(lzahl1_int.get()+1)
+)
+one_button.grid(row=6, column=0)
+
+
+two_button = ttk.Button(
+    window,
+    text=2,
+    #command=lambda: lzahl1_int.set(lzahl1_int.get()+1)
+)
+two_button.grid(row=6, column=1)
+
+
+three_button = ttk.Button(
+    window,
+    text=3,
+    #command=lambda: lzahl1_int.set(lzahl1_int.get()+1)
+)
+three_button.grid(row=6, column=2)
+
+plus_button = ttk.Button(
+    window,
+    text="+",
+    #command=lambda: lzahl1_int.set(lzahl1_int.get()+1)
+)
+plus_button.grid(row=6, column=3)
+
+change_plus_minus_sign_button = ttk.Button(
+    window,
+    text="+/-",
+    #command=lambda: lzahl1_int.set(lzahl1_int.get()+1)
+)
+change_plus_minus_sign_button.grid(row=7, column=0)
+
+
+zero_button = ttk.Button(
+    window,
+    text=0,
+    #command=lambda: lzahl1_int.set(lzahl1_int.get()+1)
+)
+zero_button.grid(row=7, column=1)
+
+comma_button = ttk.Button(
+    window,
+    text=",",
+    #command=lambda: lzahl1_int.set(lzahl1_int.get()+1)
+)
+comma_button.grid(row=7, column=2)
+
+equal_button = ttk.Button(
+    window,
+    text="=",
+    #command=lambda: lzahl1_int.set(lzahl1_int.get()+1)
+)
+equal_button.grid(row=7, column=3)
 
 
 
@@ -157,9 +228,9 @@ button1.pack()
 
 
 window.mainloop()
-print("Du hast den Taschenrechner geschlossen")
+print("Du hast den Taschenrechner geschlossen.")
 
-#Beendet das Programm an diesem Punkt
+#Closes the program at this point.
 sys.exit(0)
 
 
@@ -180,35 +251,7 @@ sys.exit(0)
 
 
 
-
-
-
-
-
-
-
-def plus(x,y):
-    ergebnis = x + y
-    return ergebnis
-
-def minus(x,y):
-    ergebnis = x - y
-    return ergebnis
-
-def mal(x,y):
-    ergebnis = x * y
-    return ergebnis
-
-def geteilt(x,y):
-    ergebnis = x / y
-    return ergebnis
-
-x = int(input())
-print("Die erste Zahk ist:", x)
-y = int(input())
-print("Die zweite Zahl ist:", y)
-
-
+"""
 
 print("Für Addition tippe 'plus' für Subtraktion 'minus' für Multiplikation 'mal' und für Division 'geteilt'")
 rechnug = str(input())
@@ -228,3 +271,5 @@ elif rechnug == "mal":
 elif rechnug == "geteilt":
     geteilt_ergebnis = geteilt(x,y)
     print("Das Ergebnis ist:", geteilt_ergebnis)
+
+"""
