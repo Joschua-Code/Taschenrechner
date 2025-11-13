@@ -3,6 +3,18 @@ from tkinter import ttk
 import sys
 
 
+#Goals and maybe goals
+#Giving every button his function
+    #Implementing the history button
+        #Making a list function that saves every result
+#Making the buttons having more height
+#Buttons adjusting to and filling the window
+#Style
+    #Making the background fancier if possible - slightly grey and blueish? - see throu would be optimal
+    #Making the buttons fancy - brighter colour than background
+    #If possible making the frame of the program dark and transparent and the name of the program in the center
+
+
 #Window and Frames
 window = tk.Tk()
 window.title("Taschenrechner")
