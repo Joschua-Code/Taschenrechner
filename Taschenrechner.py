@@ -31,21 +31,35 @@ ergebnisfenster.grid_columnconfigure((0,1,2,3,4), weight=1, uniform="cols")
 
 #Resultwindow (Number 1 - Operator - Number 2 - Result)
 
-
+number1_null = tk.BooleanVar()
+number1_null.set(True)
 number1 = tk.IntVar()
 number1.set(1)
 
 number1_label = ttk.Label(ergebnisfenster)
 number1_label.grid(row=0, column=0)
-number1_label.configure(textvariable=number1)
 
+def set_number_1():
+    if number1_null.get():
+        number1_label.configure(textvariable="")
+    else:
+        number1_label.configure(textvariable=number1)
+set_number_1()
 
+operator_null = tk.BooleanVar()
+operator_null.set(True)
 operator = tk.StringVar()
-operator.set("+")
+operator.set("")
 
 operator_label = ttk.Label(ergebnisfenster)
 operator_label.grid(row=0, column=1)
-operator_label.configure(textvariable=operator)
+
+def set_operator():
+    if operator_null.get():
+        operator_label.configure(textvariable="")
+    else:
+        operator_label.configure(textvariable=operator)
+set_operator()
 
 
 number2 = tk.IntVar()
@@ -75,6 +89,18 @@ result_label.configure(textvariable=result)
 distance_holder_label = ttk.Label(window)
 distance_holder_label.grid(row=1, column=0)
 distance_holder_label.configure(textvariable="")
+
+
+
+pointer_number = 0
+
+def calculate():
+    if operator.get() != "" and number2.get() != "":
+        print("hi")
+        #result_label.configure(textvariable=number1) = number1
+
+calculate()
+
 
 
 #It follows: Clear / Backspace / History / Operator and Number Buttons
@@ -198,12 +224,14 @@ three_button = ttk.Button(
 )
 three_button.grid(row=6, column=2)
 
+
 plus_button = ttk.Button(
     window,
     text="+",
     #command=lambda: lzahl1_int.set(lzahl1_int.get()+1)
 )
 plus_button.grid(row=6, column=3)
+
 
 change_plus_minus_sign_button = ttk.Button(
     window,
@@ -220,6 +248,7 @@ zero_button = ttk.Button(
 )
 zero_button.grid(row=7, column=1)
 
+
 comma_button = ttk.Button(
     window,
     text=",",
@@ -227,12 +256,21 @@ comma_button = ttk.Button(
 )
 comma_button.grid(row=7, column=2)
 
+
 equal_button = ttk.Button(
     window,
     text="=",
     #command=lambda: lzahl1_int.set(lzahl1_int.get()+1)
 )
 equal_button.grid(row=7, column=3)
+
+
+
+
+
+
+
+
 
 
 
