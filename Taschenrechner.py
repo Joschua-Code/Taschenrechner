@@ -134,26 +134,22 @@ def check():
     set_equal()
     set_result()
 
-set_next_number_behind_comma = False
+set_next_number_behind_comma = tk.BooleanVar(value = False)
+
 
 def enter_first_number(x):
     
     if number1_null.get():
         number1_null.set(False)
         number1.set(x)
-        print(number1.get())
-        print("Das hier sollte nicht auftauchen! v1")
 
-    elif number1.get() % 1 != 0 or set_next_number_behind_comma == True:
+    elif number1.get() % 1 != 0 or set_next_number_behind_comma.get():
         number1.set(number1.get() + x / 100)
         print(number1.get())
-        nonlocal set_next_number_behind_comma
-        set_next_number_behind_comma = False
-        print("Das hier sollte nicht auftauchen! v2")
+        set_next_number_behind_comma.set(False)
 
     else:
         number1.set(number1.get() * 10 + x)
-        print(number1.get())
     check()
 
 
