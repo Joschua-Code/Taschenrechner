@@ -7,6 +7,7 @@ import sys
 #Giving every button his function
     #Implementing the history button
         #Making a list function that saves every result
+#Implementing the Keyboard to insert Numbers or Operators
 #Making the buttons having more height
 #Buttons adjusting to and filling the window
 #Style
@@ -34,7 +35,7 @@ ergebnisfenster.grid_columnconfigure((0,1,2,3,4), weight=1, uniform="cols")
 number1_null = tk.BooleanVar()
 number1_null.set(True)
 number1 = tk.IntVar()
-number1.set(1)
+number1.set(0)
 
 number1_label = ttk.Label(ergebnisfenster)
 number1_label.grid(row=0, column=0)
@@ -49,7 +50,7 @@ set_number_1()
 operator_null = tk.BooleanVar()
 operator_null.set(True)
 operator = tk.StringVar()
-operator.set("")
+operator.set("+")
 
 operator_label = ttk.Label(ergebnisfenster)
 operator_label.grid(row=0, column=1)
@@ -62,28 +63,53 @@ def set_operator():
 set_operator()
 
 
+number2_null = tk.BooleanVar()
+number2_null.set(True)
 number2 = tk.IntVar()
-number2.set(2)
+number2.set(0)
 
 number2_label = ttk.Label(ergebnisfenster)
 number2_label.grid(row=0, column=2)
-number2_label.configure(textvariable=number2)
 
+def set_number_2():
+    if number2_null.get():
+        number2_label.configure(textvariable="")
+    else:
+        number2_label.configure(textvariable=number2)
+set_number_2()
+
+
+
+equal_null = tk.BooleanVar()
+equal_null.set(True)
+equal = tk.StringVar()
+equal.set("=")
 
 equal_label = ttk.Label(ergebnisfenster)
 equal_label.grid(row=0, column=3)
 
-equal = tk.StringVar()
-equal.set("=")
-equal_label.configure(textvariable=equal)
+def set_equal():
+    if equal_null.get():
+        equal_label.configure(textvariable="")
+    else:
+        equal_label.configure(textvariable=equal)
+set_equal()
 
 
+result_null = tk.BooleanVar()
+result_null.set(True)
 result = tk.IntVar()
-result.set(3)
+result.set(0)
 
 result_label = ttk.Label(ergebnisfenster)
 result_label.grid(row=0, column=4)
-result_label.configure(textvariable=result)
+
+def set_result():
+    if result_null.get():
+        result_label.configure(textvariable="")
+    else:
+        result_label.configure(textvariable=result)
+set_result()
 
 
 distance_holder_label = ttk.Label(window)
@@ -100,6 +126,35 @@ def calculate():
         #result_label.configure(textvariable=number1) = number1
 
 calculate()
+
+def check():
+    set_number_1()
+    set_operator()
+    set_number_2()
+    set_equal()
+    set_result()
+
+set_next_number_behind_comma = False
+
+def enter_first_number(x):
+    
+    if number1_null.get():
+        number1_null.set(False)
+        number1.set(x)
+        print(number1.get())
+        print("Das hier sollte nicht auftauchen! v1")
+
+    elif number1.get() % 1 != 0 or set_next_number_behind_comma == True:
+        number1.set(number1.get() + x / 100)
+        print(number1.get())
+        nonlocal set_next_number_behind_comma
+        set_next_number_behind_comma = False
+        print("Das hier sollte nicht auftauchen! v2")
+
+    else:
+        number1.set(number1.get() * 10 + x)
+        print(number1.get())
+    check()
 
 
 
@@ -136,11 +191,12 @@ divide_button = ttk.Button(
     )
 divide_button.grid(row=3, column=3)
 
-
+########################################################################## Current Place of Implementation
+def seven_button(): enter_first_number(7)
 seven_button = ttk.Button(
     window, 
     text=7, 
-    #command=lambda: lzahl1_int.set(lzahl1_int.get()+1)
+    command=seven_button
     )
 seven_button.grid(row=4, column=0)
 
@@ -301,25 +357,23 @@ sys.exit(0)
 
 
 
-"""
 
-print("Für Addition tippe 'plus' für Subtraktion 'minus' für Multiplikation 'mal' und für Division 'geteilt'")
-rechnug = str(input())
 
-if rechnug == "plus":
-    plus_ergebnis = plus(x,y)
-    print("Das Ergebnis ist:", plus_ergebnis)
-
-elif rechnug == "minus":
-    minus_ergebnis = minus(x,y)
-    print("Das Ergebnis ist:", minus_ergebnis)
-
-elif rechnug == "mal":
-    mal_ergebnis = mal(x,y)
-    print("Das Ergebnis ist:", mal_ergebnis)
-
-elif rechnug == "geteilt":
-    geteilt_ergebnis = geteilt(x,y)
-    print("Das Ergebnis ist:", geteilt_ergebnis)
-
-"""
+#print("Für Addition tippe 'plus' für Subtraktion 'minus' für Multiplikation 'mal' und für Division 'geteilt'")
+#rechnug = str(input())
+#
+#if rechnug == "plus":
+#    plus_ergebnis = plus(x,y)
+#    print("Das Ergebnis ist:", plus_ergebnis)
+#
+#elif rechnug == "minus":
+#    minus_ergebnis = minus(x,y)
+#    print("Das Ergebnis ist:", minus_ergebnis)
+#
+#elif rechnug == "mal":
+#    mal_ergebnis = mal(x,y)
+#    print("Das Ergebnis ist:", mal_ergebnis)
+#
+#elif rechnug == "geteilt":
+#    geteilt_ergebnis = geteilt(x,y)
+#    print("Das Ergebnis ist:", geteilt_ergebnis)
