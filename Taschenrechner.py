@@ -37,7 +37,7 @@ number1_null.set(True)
 number1 = tk.IntVar()
 number1.set(0)
 
-number1_label = ttk.Label(ergebnisfenster)
+number1_label = ttk.Label(ergebnisfenster) 
 number1_label.grid(row=0, column=0)
 
 def set_number_1():
@@ -136,21 +136,41 @@ def check():
 
 set_next_number_behind_comma = tk.BooleanVar(value = False)
 
+entry_at_field_one = tk.BooleanVar(value = True)
 
-def enter_first_number(x):
+
+def enter_number(x):
+    if entry_at_field_one.get():
     
-    if number1_null.get():
-        number1_null.set(False)
-        number1.set(x)
+        if number1_null.get():
+            number1_null.set(False)
+            number1.set(x)
 
-    elif number1.get() % 1 != 0 or set_next_number_behind_comma.get():
-        number1.set(number1.get() + x / 100)
-        print(number1.get())
-        set_next_number_behind_comma.set(False)
+        elif number1.get() % 1 != 0 or set_next_number_behind_comma.get():
+            number1.set(number1.get() + x / 100)
+            print(number1.get())
+            set_next_number_behind_comma.set(False)
 
+        else:
+            number1.set(number1.get() * 10 + x)
     else:
-        number1.set(number1.get() * 10 + x)
+        if number2_null.get():
+            number2_null.set(False)
+            number2.set(x)
+
+        elif number2.get() % 1 != 0 or set_next_number_behind_comma.get():
+            number2.set(number2.get() + x / 100)
+            print(number2.get())
+            set_next_number_behind_comma.set(False)
+
+        else:
+            number2.set(number2.get() * 10 + x)
+
+
+        
     check()
+
+
 
 
 
@@ -179,20 +199,42 @@ history_button = ttk.Button(
     )
 history_button.grid(row=3, column=2)
 
+########################################################################## Current Place of Implementation
+def set_operator_divide():
+    operator_null.set(False)
+    entry_at_field_one.set(False)
+    operator.set("/")
+    check()
+
+def set_operator_window(x):
+    operator_null.set(False)
+    entry_at_field_one.set(False)
+
+    if x == "/":
+        operator.set("/")
+    elif x == "x":
+        operator.set("x")
+    elif x == "-":
+        operator.set("-")
+    elif x == "+":
+        operator.set("+")
+    
+    check()
+    
+
 
 divide_button = ttk.Button(
     window, 
     text="/", 
-    #command=lambda: lzahl1_int.set(lzahl1_int.get()+1)
+    command=lambda: set_operator_window("/")
     )
 divide_button.grid(row=3, column=3)
 
-########################################################################## Current Place of Implementation
-def seven_button(): enter_first_number(7)
+
 seven_button = ttk.Button(
     window, 
     text=7, 
-    command=seven_button
+    command=lambda: enter_number(7)
     )
 seven_button.grid(row=4, column=0)
 
@@ -200,7 +242,7 @@ seven_button.grid(row=4, column=0)
 eight_button = ttk.Button(
     window, 
     text=8, 
-    #command=lambda: lzahl1_int.set(lzahl1_int.get()+1)
+    command=lambda: enter_number(8)
     )
 eight_button.grid(row=4, column=1)
 
@@ -208,7 +250,7 @@ eight_button.grid(row=4, column=1)
 nine_button = ttk.Button(
     window,
     text=9,
-    #command=lambda: lzahl1_int.set(lzahl1_int.get()+1)
+    command=lambda: enter_number(9)
 )
 nine_button.grid(row=4, column=2)
 
@@ -224,7 +266,7 @@ multiplication_button.grid(row=4, column=3)
 four_button = ttk.Button(
     window,
     text=4,
-    #command=lambda: lzahl1_int.set(lzahl1_int.get()+1)
+    command=lambda: enter_number(4)
 )
 four_button.grid(row=5, column=0)
 
@@ -232,7 +274,7 @@ four_button.grid(row=5, column=0)
 five_button = ttk.Button(
     window,
     text=5,
-    #command=lambda: lzahl1_int.set(lzahl1_int.get()+1)
+    command=lambda: enter_number(5)
 )
 five_button.grid(row=5, column=1)
 
@@ -240,7 +282,7 @@ five_button.grid(row=5, column=1)
 six_button = ttk.Button(
     window,
     text=6,
-    #command=lambda: lzahl1_int.set(lzahl1_int.get()+1)
+    command=lambda: enter_number(6)
 )
 six_button.grid(row=5, column=2)
 
@@ -256,7 +298,7 @@ minus_button.grid(row=5, column=3)
 one_button = ttk.Button(
     window,
     text=1,
-    #command=lambda: lzahl1_int.set(lzahl1_int.get()+1)
+    command=lambda: enter_number(1)
 )
 one_button.grid(row=6, column=0)
 
@@ -264,7 +306,7 @@ one_button.grid(row=6, column=0)
 two_button = ttk.Button(
     window,
     text=2,
-    #command=lambda: lzahl1_int.set(lzahl1_int.get()+1)
+    command=lambda: enter_number(2)
 )
 two_button.grid(row=6, column=1)
 
@@ -272,7 +314,7 @@ two_button.grid(row=6, column=1)
 three_button = ttk.Button(
     window,
     text=3,
-    #command=lambda: lzahl1_int.set(lzahl1_int.get()+1)
+    command=lambda: enter_number(3)
 )
 three_button.grid(row=6, column=2)
 
@@ -296,7 +338,7 @@ change_plus_minus_sign_button.grid(row=7, column=0)
 zero_button = ttk.Button(
     window,
     text=0,
-    #command=lambda: lzahl1_int.set(lzahl1_int.get()+1)
+    command=lambda: enter_number(0)
 )
 zero_button.grid(row=7, column=1)
 
