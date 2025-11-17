@@ -258,7 +258,7 @@ nine_button.grid(row=4, column=2)
 multiplication_button = ttk.Button(
     window, 
     text="x", 
-    #command=lambda: lzahl1_int.set(lzahl1_int.get()+1)
+    command=lambda: set_operator_window("x")
     )
 multiplication_button.grid(row=4, column=3)
 
@@ -290,7 +290,7 @@ six_button.grid(row=5, column=2)
 minus_button = ttk.Button(
     window,
     text="-",
-    #command=lambda: lzahl1_int.set(lzahl1_int.get()+1)
+    command=lambda: set_operator_window("-")
 )
 minus_button.grid(row=5, column=3)
 
@@ -322,15 +322,21 @@ three_button.grid(row=6, column=2)
 plus_button = ttk.Button(
     window,
     text="+",
-    #command=lambda: lzahl1_int.set(lzahl1_int.get()+1)
+    command=lambda: set_operator_window("+")
 )
 plus_button.grid(row=6, column=3)
 
-
+def change_plus_minus():
+    if entry_at_field_one.get():
+        if number1.get() == 0:
+            return
+        elif number1.get() >= 0:
+            number1.set(number1.get() - 2 * number1.get())
+        
 change_plus_minus_sign_button = ttk.Button(
     window,
     text="+/-",
-    #command=lambda: lzahl1_int.set(lzahl1_int.get()+1)
+    command=lambda: change_plus_minus()
 )
 change_plus_minus_sign_button.grid(row=7, column=0)
 
