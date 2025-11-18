@@ -14,6 +14,8 @@ import sys
     #Making the background fancier if possible - slightly grey and blueish? - see throu would be optimal
     #Making the buttons fancy - brighter colour than background
     #If possible making the frame of the program dark and transparent and the name of the program in the center
+#If changeing the operator after already having calculated - removing the result and equal sign
+#When pressing equal again making the result the new number 1 and removing the rest
 
 
 #Window and Frames
@@ -35,29 +37,31 @@ ergebnisfenster.grid_columnconfigure((0,1,2,3,4), weight=1, uniform="cols")
 number1_null = tk.BooleanVar()
 number1_null.set(True)
 number1 = tk.IntVar()
-number1.set(0)
+number1.set("")
 
 number1_label = ttk.Label(ergebnisfenster) 
 number1_label.grid(row=0, column=0)
 
 def set_number_1():
     if number1_null.get():
-        number1_label.configure(textvariable="")
+        number1_label.configure(textvariable=number1)
+        print("Das hier sollte geprintet werden!")
     else:
         number1_label.configure(textvariable=number1)
+        print("Das hier sollte nicht geprintet werden!")
 set_number_1()
 
 operator_null = tk.BooleanVar()
 operator_null.set(True)
 operator = tk.StringVar()
-operator.set("+")
+operator.set("")
 
 operator_label = ttk.Label(ergebnisfenster)
 operator_label.grid(row=0, column=1)
 
 def set_operator():
     if operator_null.get():
-        operator_label.configure(textvariable="")
+        operator_label.configure(textvariable=operator)
     else:
         operator_label.configure(textvariable=operator)
 set_operator()
@@ -66,14 +70,14 @@ set_operator()
 number2_null = tk.BooleanVar()
 number2_null.set(True)
 number2 = tk.IntVar()
-number2.set(0)
+number2.set("")
 
 number2_label = ttk.Label(ergebnisfenster)
 number2_label.grid(row=0, column=2)
 
 def set_number_2():
     if number2_null.get():
-        number2_label.configure(textvariable="")
+        number2_label.configure(textvariable=number2)
     else:
         number2_label.configure(textvariable=number2)
 set_number_2()
@@ -83,14 +87,14 @@ set_number_2()
 equal_null = tk.BooleanVar()
 equal_null.set(True)
 equal = tk.StringVar()
-equal.set("=")
+equal.set("")
 
 equal_label = ttk.Label(ergebnisfenster)
 equal_label.grid(row=0, column=3)
 
 def set_equal():
     if equal_null.get():
-        equal_label.configure(textvariable="")
+        equal_label.configure(textvariable=equal)
     else:
         equal_label.configure(textvariable=equal)
 set_equal()
@@ -112,20 +116,15 @@ def set_result():
 set_result()
 
 
+
+
+
+
 distance_holder_label = ttk.Label(window)
 distance_holder_label.grid(row=1, column=0)
 distance_holder_label.configure(textvariable="")
 
 
-
-pointer_number = 0
-
-def calculate():
-    if operator.get() != "" and number2.get() != "":
-        print("hi")
-        #result_label.configure(textvariable=number1) = number1
-
-calculate()
 
 def check():
     set_number_1()
@@ -139,47 +138,51 @@ set_next_number_behind_comma = tk.BooleanVar(value = False)
 entry_at_field_one = tk.BooleanVar(value = True)
 
 
-def enter_number(x):
-    if entry_at_field_one.get():
-    
-        if number1_null.get():
-            number1_null.set(False)
-            number1.set(x)
+def calculate():
+    if operator.get() != "" and number2.get() != "":
+        if operator.get() == "+":
+            result.set(number1.get() + number2.get())
 
-        elif number1.get() % 1 != 0 or set_next_number_behind_comma.get():
-            number1.set(number1.get() + x / 100)
-            print(number1.get())
-            set_next_number_behind_comma.set(False)
+        elif operator.get() == "-":
+            result.set(number1.get() - number2.get())
 
-        else:
-            number1.set(number1.get() * 10 + x)
-    else:
-        if number2_null.get():
-            number2_null.set(False)
-            number2.set(x)
+        elif operator.get() == "x":
+            result.set(number1.get() * number2.get())
 
-        elif number2.get() % 1 != 0 or set_next_number_behind_comma.get():
-            number2.set(number2.get() + x / 100)
-            print(number2.get())
-            set_next_number_behind_comma.set(False)
-
-        else:
-            number2.set(number2.get() * 10 + x)
+        elif operator.get() == "/":
+            result.set(number1.get() / number2.get())
+            
+        result_null.set(False)
+        equal_null.set(False)
+        equal.set("=")
+        check()
 
 
-        
+
+
+
+
+def clear():
+    number1_null.set(True)
+    number1.set("")
+    operator_null.set(True)
+    operator.set("")
+    number2_null.set(True)
+    number2.set("")
+    equal_null.set(True)
+    equal.set("")
+    result_null.set(True)
+    result.set("")
+    set_next_number_behind_comma.set(False)
+    entry_at_field_one.set(True)
     check()
 
 
 
-
-
-#It follows: Clear / Backspace / History / Operator and Number Buttons
-
 clear_button = ttk.Button(
     window, 
     text="C", 
-    #command=lambda: lzahl1_int.set(lzahl1_int.get()+1)
+    command=lambda: clear()
     )
 clear_button.grid(row=3, column=0)
 
@@ -199,12 +202,6 @@ history_button = ttk.Button(
     )
 history_button.grid(row=3, column=2)
 
-########################################################################## Current Place of Implementation
-def set_operator_divide():
-    operator_null.set(False)
-    entry_at_field_one.set(False)
-    operator.set("/")
-    check()
 
 def set_operator_window(x):
     operator_null.set(False)
@@ -229,29 +226,6 @@ divide_button = ttk.Button(
     command=lambda: set_operator_window("/")
     )
 divide_button.grid(row=3, column=3)
-
-
-
-numbers = {"Button_0" : {"num": 0, "row" : 7, "column" : 1},
-           "Button_1" : {"num": 1, "row" : 6, "column" : 0},
-           "Button_2" : {"num": 2, "row" : 6, "column" : 1},
-           "Button_3" : {"num": 3, "row" : 6, "column" : 2},
-           "Button_4" : {"num": 4, "row" : 5, "column" : 0},
-           "Button_5" : {"num": 5, "row" : 5, "column" : 1},
-           "Button_6" : {"num": 6, "row" : 5, "column" : 2},
-           "Button_7" : {"num": 7, "row" : 4, "column" : 0},
-           "Button_8" : {"num": 8, "row" : 4, "column" : 1},
-           "Button_9" : {"num": 9, "row" : 4, "column" : 2}
-        }
-
-for name, value in numbers.items():
-    item = ttk.Button(
-        window,
-        text = value["num"],
-        command = lambda x = value["num"]: enter_number(x)
-    )
-    item.grid(row = value["row"], column = value["column"])
-
 
 
 multiplication_button = ttk.Button(
@@ -305,12 +279,63 @@ comma_button.grid(row=7, column=2)
 equal_button = ttk.Button(
     window,
     text="=",
-    #command=lambda: lzahl1_int.set(lzahl1_int.get()+1)
+    command=lambda: calculate()
 )
 equal_button.grid(row=7, column=3)
 
 
 
+def enter_number(x):
+    if entry_at_field_one.get():
+    
+        if number1_null.get():
+            number1_null.set(False)
+            number1.set(x)
+
+        elif number1.get() % 1 != 0 or set_next_number_behind_comma.get():
+            number1.set(number1.get() + x / 100)
+            print(number1.get())
+            set_next_number_behind_comma.set(False)
+
+        else:
+            number1.set(number1.get() * 10 + x)
+    else:
+        if number2_null.get():
+            number2_null.set(False)
+            number2.set(x)
+
+        elif number2.get() % 1 != 0 or set_next_number_behind_comma.get():
+            number2.set(number2.get() + x / 100)
+            print(number2.get())
+            set_next_number_behind_comma.set(False)
+
+        else:
+            number2.set(number2.get() * 10 + x)
+
+
+        
+    check()
+
+
+numbers = {"Button_0" : {"num": 0, "row" : 7, "column" : 1},
+           "Button_1" : {"num": 1, "row" : 6, "column" : 0},
+           "Button_2" : {"num": 2, "row" : 6, "column" : 1},
+           "Button_3" : {"num": 3, "row" : 6, "column" : 2},
+           "Button_4" : {"num": 4, "row" : 5, "column" : 0},
+           "Button_5" : {"num": 5, "row" : 5, "column" : 1},
+           "Button_6" : {"num": 6, "row" : 5, "column" : 2},
+           "Button_7" : {"num": 7, "row" : 4, "column" : 0},
+           "Button_8" : {"num": 8, "row" : 4, "column" : 1},
+           "Button_9" : {"num": 9, "row" : 4, "column" : 2}
+        }
+
+for name, value in numbers.items():
+    item = ttk.Button(
+        window,
+        text = value["num"],
+        command = lambda x = value["num"]: enter_number(x)
+    )
+    item.grid(row = value["row"], column = value["column"])
 
 
 
