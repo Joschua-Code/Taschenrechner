@@ -231,28 +231,27 @@ divide_button = ttk.Button(
 divide_button.grid(row=3, column=3)
 
 
-seven_button = ttk.Button(
-    window, 
-    text=7, 
-    command=lambda: enter_number(7)
+
+numbers = {"Button_0" : {"num": 0, "row" : 7, "column" : 1},
+           "Button_1" : {"num": 1, "row" : 6, "column" : 0},
+           "Button_2" : {"num": 2, "row" : 6, "column" : 1},
+           "Button_3" : {"num": 3, "row" : 6, "column" : 2},
+           "Button_4" : {"num": 4, "row" : 5, "column" : 0},
+           "Button_5" : {"num": 5, "row" : 5, "column" : 1},
+           "Button_6" : {"num": 6, "row" : 5, "column" : 2},
+           "Button_7" : {"num": 7, "row" : 4, "column" : 0},
+           "Button_8" : {"num": 8, "row" : 4, "column" : 1},
+           "Button_9" : {"num": 9, "row" : 4, "column" : 2}
+        }
+
+for name, value in numbers.items():
+    item = ttk.Button(
+        window,
+        text = value["num"],
+        command = lambda x = value["num"]: enter_number(x)
     )
-seven_button.grid(row=4, column=0)
+    item.grid(row = value["row"], column = value["column"])
 
-
-eight_button = ttk.Button(
-    window, 
-    text=8, 
-    command=lambda: enter_number(8)
-    )
-eight_button.grid(row=4, column=1)
-
-
-nine_button = ttk.Button(
-    window,
-    text=9,
-    command=lambda: enter_number(9)
-)
-nine_button.grid(row=4, column=2)
 
 
 multiplication_button = ttk.Button(
@@ -263,29 +262,6 @@ multiplication_button = ttk.Button(
 multiplication_button.grid(row=4, column=3)
 
 
-four_button = ttk.Button(
-    window,
-    text=4,
-    command=lambda: enter_number(4)
-)
-four_button.grid(row=5, column=0)
-
-
-five_button = ttk.Button(
-    window,
-    text=5,
-    command=lambda: enter_number(5)
-)
-five_button.grid(row=5, column=1)
-
-
-six_button = ttk.Button(
-    window,
-    text=6,
-    command=lambda: enter_number(6)
-)
-six_button.grid(row=5, column=2)
-
 
 minus_button = ttk.Button(
     window,
@@ -294,29 +270,6 @@ minus_button = ttk.Button(
 )
 minus_button.grid(row=5, column=3)
 
-
-one_button = ttk.Button(
-    window,
-    text=1,
-    command=lambda: enter_number(1)
-)
-one_button.grid(row=6, column=0)
-
-
-two_button = ttk.Button(
-    window,
-    text=2,
-    command=lambda: enter_number(2)
-)
-two_button.grid(row=6, column=1)
-
-
-three_button = ttk.Button(
-    window,
-    text=3,
-    command=lambda: enter_number(3)
-)
-three_button.grid(row=6, column=2)
 
 
 plus_button = ttk.Button(
@@ -339,14 +292,6 @@ change_plus_minus_sign_button = ttk.Button(
     command=lambda: change_plus_minus()
 )
 change_plus_minus_sign_button.grid(row=7, column=0)
-
-
-zero_button = ttk.Button(
-    window,
-    text=0,
-    command=lambda: enter_number(0)
-)
-zero_button.grid(row=7, column=1)
 
 
 comma_button = ttk.Button(
@@ -375,49 +320,8 @@ equal_button.grid(row=7, column=3)
 
 
 
-
-
 window.mainloop()
 print("Du hast den Taschenrechner geschlossen.")
 
 #Closes the program at this point.
 sys.exit(0)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#print("Für Addition tippe 'plus' für Subtraktion 'minus' für Multiplikation 'mal' und für Division 'geteilt'")
-#rechnug = str(input())
-#
-#if rechnug == "plus":
-#    plus_ergebnis = plus(x,y)
-#    print("Das Ergebnis ist:", plus_ergebnis)
-#
-#elif rechnug == "minus":
-#    minus_ergebnis = minus(x,y)
-#    print("Das Ergebnis ist:", minus_ergebnis)
-#
-#elif rechnug == "mal":
-#    mal_ergebnis = mal(x,y)
-#    print("Das Ergebnis ist:", mal_ergebnis)
-#
-#elif rechnug == "geteilt":
-#    geteilt_ergebnis = geteilt(x,y)
-#    print("Das Ergebnis ist:", geteilt_ergebnis)
