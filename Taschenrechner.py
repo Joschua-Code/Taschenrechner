@@ -16,6 +16,7 @@ import sys
     #If possible making the frame of the program dark and transparent and the name of the program in the center
 #If changeing the operator after already having calculated - removing the result and equal sign
 #When pressing equal again making the result the new number 1 and removing the rest
+# Making the numbers slightly brighter than the other buttons and the equal button light blue or something
 
 
 #Window and Frames
