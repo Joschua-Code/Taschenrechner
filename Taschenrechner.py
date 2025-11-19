@@ -17,6 +17,12 @@ import sys
 #If changeing the operator after already having calculated - removing the result and equal sign
 #When pressing equal again making the result the new number 1 and removing the rest
 # Making the numbers slightly brighter than the other buttons and the equal button light blue or something
+# Solving the problem of divididing by zero
+
+
+#Known Bugs
+#Comma doesnt work anymore
+#Results doesnt have any fractional values anymore
 
 
 #Window and Frames
@@ -39,6 +45,7 @@ number1_null = tk.BooleanVar()
 number1_null.set(True)
 number1 = tk.IntVar()
 number1.set("")
+
 
 number1_label = ttk.Label(ergebnisfenster) 
 number1_label.grid(row=0, column=0)
@@ -153,13 +160,22 @@ def calculate():
         elif operator.get() == "/":
             result.set(number1.get() / number2.get())
             
+        if result.get() % 1 == 0:
+            result.set(int(result.get()))
+
         result_null.set(False)
         equal_null.set(False)
         equal.set("=")
         check()
 
 
-
+def next_calculation():
+    n1 = number1.get()
+    n2 = number2.get()
+    r = result.get()
+    clear()
+    number1.set(r)
+    entry_at_field_one.set(False)
 
 
 
@@ -208,14 +224,30 @@ def set_operator_window(x):
     operator_null.set(False)
     entry_at_field_one.set(False)
 
-    if x == "/":
-        operator.set("/")
-    elif x == "x":
-        operator.set("x")
-    elif x == "-":
-        operator.set("-")
-    elif x == "+":
-        operator.set("+")
+    if result_null.get():
+
+        if x == "/":
+            operator.set("/")
+        elif x == "x":
+            operator.set("x")
+        elif x == "-":
+            operator.set("-")
+        elif x == "+":
+            operator.set("+")
+    else:
+
+        if x == "/":
+            next_calculation()
+            operator.set("/")
+        elif x == "x":
+            next_calculation()
+            operator.set("x")
+        elif x == "-":
+            next_calculation()
+            operator.set("-")
+        elif x == "+":
+            next_calculation()
+            operator.set("+")
     
     check()
     
