@@ -19,10 +19,10 @@ import sys
 # Making the numbers slightly brighter than the other buttons and the equal button light blue or something
 # Solving the problem of divididing by zero
 
-
 #Known Bugs
-#Comma doesnt work anymore
-#Results doesnt have any fractional values anymore
+#Not possible to have several zeros behind the comma (need to convert the value into a string to solve)
+#Numbers have 0 behind the comma even tho they dont have a fractional value
+#
 
 
 #Window and Frames
@@ -43,20 +43,21 @@ ergebnisfenster.grid_columnconfigure((0,1,2,3,4), weight=1, uniform="cols")
 
 number1_null = tk.BooleanVar()
 number1_null.set(True)
-number1 = tk.IntVar()
-number1.set("")
+number1 = tk.DoubleVar()
+number1.set(0)
 
 
 number1_label = ttk.Label(ergebnisfenster) 
 number1_label.grid(row=0, column=0)
 
 def set_number_1():
+    print("Executed - set_number_1")
     if number1_null.get():
-        number1_label.configure(textvariable=number1)
-        print("Das hier sollte geprintet werden!")
+        number1_label.configure(text=f"{number1.get():.2f}")
+        print("Executed - set_number_1 - if")
     else:
-        number1_label.configure(textvariable=number1)
-        print("Das hier sollte nicht geprintet werden!")
+        number1_label.configure(text=f"{number1.get():.2f}")
+        print("Executed - set_number_1 - else")
 set_number_1()
 
 operator_null = tk.BooleanVar()
@@ -77,7 +78,7 @@ set_operator()
 
 number2_null = tk.BooleanVar()
 number2_null.set(True)
-number2 = tk.IntVar()
+number2 = tk.DoubleVar()
 number2.set("")
 
 number2_label = ttk.Label(ergebnisfenster)
@@ -110,7 +111,7 @@ set_equal()
 
 result_null = tk.BooleanVar()
 result_null.set(True)
-result = tk.IntVar()
+result = tk.DoubleVar()
 result.set(0)
 
 result_label = ttk.Label(ergebnisfenster)
@@ -141,7 +142,7 @@ def check():
     set_equal()
     set_result()
 
-set_next_number_behind_comma = tk.BooleanVar(value = False)
+# sollte weg können - set_next_number_behind_comma = tk.BooleanVar(value = False)
 
 entry_at_field_one = tk.BooleanVar(value = True)
 
@@ -190,8 +191,10 @@ def clear():
     equal.set("")
     result_null.set(True)
     result.set("")
-    set_next_number_behind_comma.set(False)
+    #set_next_number_behind_comma.set(False)
     entry_at_field_one.set(True)
+    number1_comma_position.set(0)
+    number2_comma_position.set(0)
     check()
 
 
@@ -300,11 +303,22 @@ change_plus_minus_sign_button = ttk.Button(
 )
 change_plus_minus_sign_button.grid(row=7, column=0)
 
+number1_comma_position = tk.IntVar(value=0)
+number2_comma_position = tk.IntVar(value=0)
+
+def comma_pressed():
+    if entry_at_field_one.get():
+        number1_comma_position.set(number1_comma_position.get() + 1)
+        print("Number 1 is comma ready.", number1_comma_position.get())
+    else:
+        number2_comma_position.set(number2_comma_position.get() + 1)
+        print("Number 2 is comma ready.")
+    #set_next_number_behind_comma.set(True)
 
 comma_button = ttk.Button(
     window,
     text=",",
-    #command=lambda: lzahl1_int.set(lzahl1_int.get()+1)
+    command=comma_pressed
 )
 comma_button.grid(row=7, column=2)
 
@@ -324,25 +338,28 @@ def enter_number(x):
         if number1_null.get():
             number1_null.set(False)
             number1.set(x)
+            print("Es kommt bei enter number number1_null rein")
 
-        elif number1.get() % 1 != 0 or set_next_number_behind_comma.get():
-            number1.set(number1.get() + x / 100)
-            print(number1.get())
-            set_next_number_behind_comma.set(False)
+        elif number1_comma_position.get() > 0:
+            number1.set(number1.get() + x * (0.1 ** number1_comma_position.get()))
+            number1_comma_position.set(number1_comma_position.get() + 1)
+            print(number1_comma_position.get())
+            #set_next_number_behind_comma.set(False)
 
         else:
             number1.set(number1.get() * 10 + x)
+            print("Es kommt bei enter number den normalen Fall rein")
     else:
-        if number2_null.get():
+        if number2_null.get(): #No number assigned so far
             number2_null.set(False)
             number2.set(x)
 
-        elif number2.get() % 1 != 0 or set_next_number_behind_comma.get():
-            number2.set(number2.get() + x / 100)
-            print(number2.get())
-            set_next_number_behind_comma.set(False)
+        elif number2_comma_position.get() > 0: #The new number shall be fractional
+            number2.set(number2.get() + x * (0.1 ** number2_comma_position.get()))
+            number2_comma_position.set(number1_comma_position.get() + 1)
+            #set_next_number_behind_comma.set(False)
 
-        else:
+        else: #Normal input of number behind current number
             number2.set(number2.get() * 10 + x)
 
 
