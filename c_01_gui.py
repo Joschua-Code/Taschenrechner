@@ -29,6 +29,8 @@ class GUI:
         self.ergebnisfenster.grid(row=0, column=0, columnspan=4, sticky="ew")
         self.ergebnisfenster.grid_columnconfigure((0,1,2,3,4), weight=1, uniform="cols")
 
+        #Pointer to the current entryfield
+        self.entry_at_field_one = tk.BooleanVar(value = True)
 
         #Resultframe - (Number 1) - Creation of Label
         self.number1_label = ttk.Label(self.ergebnisfenster) 
@@ -36,11 +38,14 @@ class GUI:
 
         #Resultframe - (Number 1) - Creation of Variable
         self.number1 = tk.DoubleVar()
-        self.number1.set(0)
+        self.number1.set("")
 
         #Resultframe - (Number 1) - Boolean for checking if Variable is initialized
         self.number1_null = tk.BooleanVar()
         self.number1_null.set(True)
+
+        #Commaposition of Number 1
+        self.number1_comma_position = tk.IntVar(value=0)
 
 
         #Resultframe - (Operator) - Creation of Label
@@ -55,6 +60,8 @@ class GUI:
         self.operator_null = tk.BooleanVar()
         self.operator_null.set(True)
 
+        #Commaposition of Number 2
+        self.number2_comma_position = tk.IntVar(value=0)
 
         #Resultframe - (Number 2) - Creation of Label
         self.number2_label = ttk.Label(self.ergebnisfenster)
@@ -201,18 +208,6 @@ class GUI:
             self.item.grid(row = value["row"], column = value["column"])
 
 
-        #Variabels
-
-        #Pointer to the current entryfield
-        self.entry_at_field_one = tk.BooleanVar(value = True)
-
-        #Pointer for the commaposition
-        self.number1_comma_position = tk.IntVar(value=0)
-        self.number2_comma_position = tk.IntVar(value=0)
-
-
-        
-        #print("Du hast den Taschenrechner geschlossen.")
 
         #Closes the program at this point.
         #sys.exit(0)

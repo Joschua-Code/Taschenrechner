@@ -16,12 +16,12 @@ class Logic():
     def set_number_1(self):
         print("Executed - set_number_1")
         if self.gui.number1_null.get():
-            self.gui.number1_label.configure(text=f"{self.gui.number1.get():.2f}")
+            self.gui.number1_label.configure(textvariable=self.gui.number1)
             print("Executed - set_number_1 - if")
         else:
-            self.gui.number1_label.configure(text=f"{self.gui.number1.get():.2f}")
+            self.gui.number1_label.configure(textvariable=self.gui.number1)
             print("Executed - set_number_1 - else")
-
+#text=f"{self.gui.number1.get():.2f}
     def set_operator(self):
         if self.gui.operator_null.get():
             self.gui.operator_label.configure(textvariable=self.gui.operator)
@@ -73,6 +73,7 @@ class Logic():
             self.gui.result_null.set(False)
             self.gui.equal_null.set(False)
             self.gui.equal.set("=")
+            self.check()
                       
 
     #Clears the Result window except it keeps the result value and puts it in the Number 1 Frame
@@ -150,7 +151,7 @@ class Logic():
 
 
     def enter_number(self, x):
-        if self.gui.entry_at_field_one.get():
+        if self.gui.entry_at_field_one.get(): # --- For Number 1 ---
         
             if self.gui.number1_null.get():
                 self.gui.number1_null.set(False)
@@ -166,7 +167,7 @@ class Logic():
             else:
                 self.gui.number1.set(self.gui.number1.get() * 10 + x)
                 print("Es kommt bei enter number den normalen Fall rein")
-        else:
+        else: # --- For Number 2 ---
             if self.gui.number2_null.get(): #No number assigned so far
                 self.gui.number2_null.set(False)
                 self.gui.number2.set(x)
@@ -178,5 +179,7 @@ class Logic():
 
             else: #Normal input of number behind current number
                 self.gui.number2.set(self.gui.number2.get() * 10 + x)
+        print(self.gui.number1.get())
         self.check()
+        print(self.gui.number1.get())
 
