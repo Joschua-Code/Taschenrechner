@@ -39,13 +39,14 @@ class GUI:
         #Resultframe - (Number 1) - Creation of Variable
         self.number1 = tk.DoubleVar()
         self.number1.set("")
+        self.number1_label.configure(textvariable=self.number1)
 
         #Resultframe - (Number 1) - Boolean for checking if Variable is initialized
         self.number1_null = tk.BooleanVar()
         self.number1_null.set(True)
 
         #Commaposition of Number 1
-        self.number1_comma_position = tk.IntVar(value=0)
+        self.number1_comma_position = 0
 
 
         #Resultframe - (Operator) - Creation of Label
@@ -61,7 +62,7 @@ class GUI:
         self.operator_null.set(True)
 
         #Commaposition of Number 2
-        self.number2_comma_position = tk.IntVar(value=0)
+        self.number2_comma_position = 0
 
         #Resultframe - (Number 2) - Creation of Label
         self.number2_label = ttk.Label(self.ergebnisfenster)
