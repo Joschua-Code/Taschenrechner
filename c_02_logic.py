@@ -18,9 +18,9 @@ class Logic():
             return
         
         if self.gui.number1_comma_position == 0:
-            self.gui.number1_label.configure(textvariable="", text=f"{self.gui.number1.get():.0f}")
+            self.gui.number1_label.configure(textvariable="", text=f"{self.gui.number1.get():,.0f}")
         else:       
-            self.gui.number1_label.configure(textvariable=self.gui.number1)
+            self.gui.number1_label.configure(textvariable="", text=f"{self.gui.number1.get():,.{self.gui.number1_comma_position-1}f}")
 
     def set_operator(self):
         if self.gui.operator_null.get():
@@ -33,9 +33,9 @@ class Logic():
             return
         
         if self.gui.number2_comma_position == 0:
-            self.gui.number2_label.configure(textvariable="", text=f"{self.gui.number2.get():.0f}")
+            self.gui.number2_label.configure(textvariable="", text=f"{self.gui.number2.get():,.0f}")
         else:       
-            self.gui.number2_label.configure(textvariable=self.gui.number2)
+            self.gui.number2_label.configure(textvariable="", text=f"{self.gui.number2.get():,.{self.gui.number2_comma_position-1}f}")
     
     def set_equal(self):
         if self.gui.equal_null.get():
@@ -46,8 +46,11 @@ class Logic():
     def set_result(self):
         if self.gui.result_null.get():
             self.gui.result_label.configure(textvariable="")
+        elif self.gui.result.get() % 1 == 0:
+            self.gui.result_label.configure(textvariable="", text=f"{self.gui.result.get():,.0f}")
         else:
             self.gui.result_label.configure(textvariable=self.gui.result)
+            self.gui.result_label.configure(textvariable="", text=f"{self.gui.result.get():,}")            
 
     def check(self):
         self.set_number_1()
@@ -60,18 +63,28 @@ class Logic():
         if self.gui.operator.get() != "" and self.gui.number2.get() != "":
             if self.gui.operator.get() == "+":
                 self.gui.result.set(self.gui.number1.get() + self.gui.number2.get())
+                self.gui.result_label.configure(textvariable="", text=f"{self.gui.result.get():,}")
+                print(f"{self.gui.result.get():,}")
+                print("here !")
 
             elif self.gui.operator.get() == "-":
                 self.gui.result.set(self.gui.number1.get() - self.gui.number2.get())
+                self.gui.result_label.configure(textvariable="", text=f"{self.gui.result.get():,}")
 
             elif self.gui.operator.get() == "x":
                 self.gui.result.set(self.gui.number1.get() * self.gui.number2.get())
+                self.gui.result_label.configure(textvariable="", text=f"{self.gui.result.get():,}")
 
             elif self.gui.operator.get() == "/":
                 self.gui.result.set(self.gui.number1.get() / self.gui.number2.get())
+                self.gui.result_label.configure(textvariable="", text=f"{self.gui.result.get():,}")
                 
-            if self.gui.result.get() % 1 == 0:
-                self.gui.result.set(int(self.gui.result.get()))
+            #if self.gui.number1_comma_position >= self.gui.number2_comma_position:
+            #    self.gui.result_label.configure(textvariable="", text=f"{self.gui.result.get():.{self.gui.number1_comma_position-1}f}")
+            #else:
+
+
+
 
             self.gui.result_null.set(False)
             self.gui.equal_null.set(False)
@@ -101,6 +114,7 @@ class Logic():
         self.gui.equal.set("")
         self.gui.result_null.set(True)
         self.gui.result.set("")
+        self.gui.result_label.configure(text="")
         self.gui.entry_at_field_one.set(True)
         self.gui.number1_comma_position = 0
         self.gui.number2_comma_position = 0
@@ -142,8 +156,15 @@ class Logic():
         if self.gui.entry_at_field_one.get():
             if self.gui.number1.get() == 0:
                 return
-            elif self.gui.number1.get() >= 0:
-                self.gui.number1.set(self.gui.number1.get() - 2 * self.gui.number1.get())
+            else:
+                self.gui.number1.set(self.gui.number1.get() * -1)
+                self.set_number_1()
+        else:
+            if self.gui.number2.get() == 0:
+                return
+            else:
+                self.gui.number2.set(self.gui.number2.get() * -1)
+                self.set_number_2()
 
 
     def comma_pressed(self):

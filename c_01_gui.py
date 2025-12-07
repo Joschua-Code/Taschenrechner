@@ -20,6 +20,7 @@ class GUI:
         self.window.geometry("400x225")
         self.window.minsize(width=250,height=300)
         self.window.configure(padx= 50, pady=50)
+        self.window.resizable(False, False)
 
 
         #Resultframe - (Number 1 - Operator - Number 2 - Result)
@@ -28,6 +29,7 @@ class GUI:
         self.ergebnisfenster = tk.Frame(self.window)
         self.ergebnisfenster.grid(row=0, column=0, columnspan=4, sticky="ew")
         self.ergebnisfenster.grid_columnconfigure((0,1,2,3,4), weight=1, uniform="cols")
+
 
         #Pointer to the current entryfield
         self.entry_at_field_one = tk.BooleanVar(value = True)
@@ -175,7 +177,7 @@ class GUI:
 
         self.comma_button = ttk.Button(
             self.window,
-            text=",",
+            text=".",
             command=lambda: self.logic.comma_pressed()
         )
         self.comma_button.grid(row=7, column=2)
