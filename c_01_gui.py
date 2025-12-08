@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 import sys
 import c_02_logic
-
+from decimal import Decimal
 
 class GUI:
     def __init__(self):
@@ -129,8 +129,8 @@ class GUI:
 
         self.history_button = ttk.Button(
             self.window, 
-            text="☰", 
-            #command=lambda: ---------------------------------------------- ᕦ(＾O＾)ᕥ WORK IN PROGRESS ᕦ(＾O＾)ᕥ ----------------------------------------------
+            text="☰Test☰", 
+            command=lambda: self.logic.test()
             )
         self.history_button.grid(row=3, column=2)
 

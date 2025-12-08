@@ -1,3 +1,5 @@
+from decimal import Decimal
+import tkinter as tk
 
 class Logic():
 
@@ -50,7 +52,9 @@ class Logic():
             self.gui.result_label.configure(textvariable="", text=f"{self.gui.result.get():,.0f}")
         else:
             self.gui.result_label.configure(textvariable=self.gui.result)
-            self.gui.result_label.configure(textvariable="", text=f"{self.gui.result.get():,}")            
+            self.gui.result_label.configure(textvariable="", text=f"{self.gui.result.get():,}")    
+
+        print(self.gui.result.get())      
 
     def check(self):
         self.set_number_1()
@@ -203,3 +207,21 @@ class Logic():
         self.check()
         print(self.gui.number1.get())
 
+    def test(self):
+        popup = tk.Toplevel(self.gui.window)
+        popup.transient(self.gui.window)
+        popup.grab_set()
+        popup.resizable(False, False)
+        x_window = self.gui.window.winfo_x()
+        y_window = self.gui.window.winfo_y()
+        width_window = self.gui.window.winfo_width()
+        height_window = self.gui.window.winfo_height()
+
+        #Calculating the middle point of window
+        x_popup = x_window + width_window // 2
+        y_popup = y_window + height_window // 2
+
+        popup.geometry(f"{w}x{h}+{x}+{y}")
+
+
+    
