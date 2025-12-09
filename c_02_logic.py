@@ -216,12 +216,19 @@ class Logic():
         y_window = self.gui.window.winfo_y()
         width_window = self.gui.window.winfo_width()
         height_window = self.gui.window.winfo_height()
+        popup.iconbitmap("Icon_Calculator_16x16.ico")
+        popup.title("Hinweis")
+        #Size of popup
+        w = 200
+        h = 100
 
         #Calculating the middle point of window
-        x_popup = x_window + width_window // 2
-        y_popup = y_window + height_window // 2
+        x_popup = x_window + (width_window - w) // 2
+        y_popup = y_window + (height_window - h) // 2
 
-        popup.geometry(f"{w}x{h}+{x}+{y}")
+        popup.geometry(f"{w}x{h}+{x_popup}+{y_popup}")
+
+        #popup.
 
 
     

@@ -21,6 +21,7 @@ class GUI:
         self.window.minsize(width=250,height=300)
         self.window.configure(padx= 50, pady=50)
         self.window.resizable(False, False)
+        self.window.iconbitmap("Icon_Calculator_16x16.ico")
 
 
         #Resultframe - (Number 1 - Operator - Number 2 - Result)
