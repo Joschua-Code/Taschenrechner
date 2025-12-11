@@ -54,7 +54,7 @@ class Logic():
             self.gui.result_label.configure(textvariable=self.gui.result)
             self.gui.result_label.configure(textvariable="", text=f"{self.gui.result.get():,}")    
 
-        print(self.gui.result.get())      
+        #print(self.gui.result.get())      
 
     def check(self):
         self.set_number_1()
@@ -82,7 +82,8 @@ class Logic():
             elif self.gui.operator.get() == "/":
                 self.gui.result.set(self.gui.number1.get() / self.gui.number2.get())
                 self.gui.result_label.configure(textvariable="", text=f"{self.gui.result.get():,}")
-                
+            
+            print("It comes to this point")
             #if self.gui.number1_comma_position >= self.gui.number2_comma_position:
             #    self.gui.result_label.configure(textvariable="", text=f"{self.gui.result.get():.{self.gui.number1_comma_position-1}f}")
             #else:
@@ -98,14 +99,18 @@ class Logic():
 
     #Clears the Result window except it keeps the result value and puts it in the Number 1 Frame
     def next_calculation(self):
+        print("Start of next_calculation.")
         n1 = self.gui.number1.get()
         n2 = self.gui.number2.get()
         r = self.gui.result.get()
+        print(f"Result of result.get() {self.gui.result.get()}")
         self.clear()
         self.enter_number(r)
         self.gui.entry_at_field_one.set(False)
+        print("End of next_calculation.")
 
     def clear(self):
+        print("Start of clear.")
         self.gui.number1_null.set(True)
         self.gui.number1.set("")
         self.gui.number1_label.configure(text="")
@@ -123,6 +128,7 @@ class Logic():
         self.gui.number1_comma_position = 0
         self.gui.number2_comma_position = 0
         self.check()
+        print("End of clear.")
 
 
     def set_operator_window(self, x):
