@@ -22,7 +22,7 @@ class Logic():
         if self.gui.number1_comma_position == 0:
             self.gui.number1_label.configure(textvariable="", text=f"{self.gui.number1.get():,.0f}")
         else:       
-            self.gui.number1_label.configure(textvariable="", text=f"{self.gui.number1.get():,.{self.gui.number1_comma_position}f}")
+            self.gui.number1_label.configure(textvariable="", text=f"{self.gui.number1.get():,.{self.gui.number1_comma_position-1}f}")
 
     def set_operator(self):
         if self.gui.operator_null.get():
@@ -62,6 +62,7 @@ class Logic():
         self.set_number_2()
         self.set_equal()
         self.set_result()
+        print(f"Here comes the comma position of number1: {self.gui.number1_comma_position}")
 
     def calculate(self):
         if self.gui.operator.get() != "" and self.gui.number2.get() != "":
@@ -106,7 +107,7 @@ class Logic():
         _, _, r_comma_position = self.getthelength(r)
         print(f"Result of result.get() {self.gui.result.get()}")
         self.clear()
-        self.gui.number1_comma_position = r_comma_position                      #    ------------------ CURRENT PLACE OF WORK IN PROGRESS ------------------------
+        self.gui.number1_comma_position = r_comma_position + 1                      #    ------------------ CURRENT PLACE OF WORK IN PROGRESS ------------------------
         self.enter_number(r)
         self.gui.entry_at_field_one.set(False)
         print(self.gui.number1.get())
