@@ -163,6 +163,9 @@ class Logic():
         
 
     def change_plus_minus(self):
+        if self.gui.result_null.get() != True: #Checks if Result is Null if not it blocks entering a Number after already calculating
+            return
+        
         if self.gui.entry_at_field_one.get():
             if self.gui.number1.get() == 0:
                 return
@@ -177,7 +180,7 @@ class Logic():
                 self.set_number_2()
 
 
-    def comma_pressed(self):
+    def comma_pressed(self):        
         if self.gui.entry_at_field_one.get():
             self.gui.number1_comma_position += 1
         else:
@@ -185,6 +188,9 @@ class Logic():
 
 
     def enter_number(self, x):
+        if self.gui.result_null.get() != True: #Checks if Result is Null if not it blocks entering a Number after already calculating
+            return
+        
         if self.gui.entry_at_field_one.get():                               # --- For Number 1 ---
 
             if self.gui.number1_null.get(): #No number assigned so far

@@ -1,24 +1,11 @@
-#Goals and maybe goals
-#Giving every button his function
-    #Implementing the history button
-        #Making a list function that saves every result
-#Implementing the Keyboard to insert Numbers or Operators
-#Making the buttons having more height
-#Buttons adjusting to and filling the window
-#Style
-    #Making the background fancier if possible - slightly grey and blueish? - see throu would be optimal
-    #Making the buttons fancy - brighter colour than background
-    #If possible making the frame of the program dark and transparent and the name of the program in the center
-#If changeing the operator after already having calculated - removing the result and equal sign
-#When pressing equal again making the result the new number 1 and removing the rest
-# Making the numbers slightly brighter than the other buttons and the equal button light blue or something
-# Solving the problem of divididing by zero
-
-
-
-
+#To-Do
+#Being able to Use Keyboard and Num Block Buttons for using the calculator
+#Giving the Backbutton his funktion
+#Implementing a History Button that displays all Calculations
+#Checking if everything is commented nice
 
 
 #Known Bugs
-#Not possible to have several zeros behind the comma (need to convert the value into a string to solve)
-#Numbers have 0 behind the comma even tho they dont have a fractional value
+# 1 - After Plus Minus is pressed its possible to still enter numbers that then get falsely added instead of substracted
+# 2 - Result not keeping the max Numbers of 8 - Example of not working atm (5900 / 12)
+# 3 - -------------------- A bunch of nothing --------------------
