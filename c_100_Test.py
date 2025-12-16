@@ -33,3 +33,37 @@ def test_if_number_is_short_enough(x):
 print(test_if_number_is_short_enough(123456789))
 print(len(str(1234567891)))
 
+
+
+#def getthelength(x) -> tuple[int, int, int]:    
+#    if x % 1 == 0:
+#        total_length = full_numbers_length = len(str(x))
+#    else:
+#        total_length = len(str(x)) - 1
+#        full_numbers_length, decimal_length = str(x).split(".")
+#        full_numbers_length, decimal_length = len(full_numbers_length), len(decimal_length)
+#        return total_length, full_numbers_length, decimal_length
+#
+#print(getthelength(100.1234)[0], getthelength(100.1234)[1], getthelength(100.1234)[2])
+#
+
+
+def getthelength(x) -> tuple[int, int, int]:    
+    if x % 1 == 0:
+        total_length = full_numbers_length = len(str(x))
+        return total_length, full_numbers_length, 0
+    else:
+        total_length = len(str(x)) - 1
+        full_numbers_length, decimal_length = str(x).split(".")
+        full_numbers_length, decimal_length = len(full_numbers_length), len(decimal_length)
+        return total_length, full_numbers_length, decimal_length
+    
+def is_length_under_9(x) -> bool:
+    total_length, _, _ = getthelength(x)
+    return total_length < 9
+
+
+print(is_length_under_9(123456789))
+
+
+print(f"{10.1:,.{1}f}")

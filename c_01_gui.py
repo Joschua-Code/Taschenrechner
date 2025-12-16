@@ -16,8 +16,8 @@ class GUI:
     def initialize_window_and_variables(self):
         #Window & Windowsettings
         self.window = tk.Tk()
-        self.window.title("Taschenrechner")
-        self.window.geometry("400x225")
+        self.window.title("Simple Calculator")
+        self.window.geometry("400x200")
         self.window.minsize(width=250,height=300)
         self.window.configure(padx= 50, pady=50)
         self.window.resizable(False, False)

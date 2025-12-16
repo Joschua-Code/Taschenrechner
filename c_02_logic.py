@@ -53,8 +53,7 @@ class Logic():
         else:
             self.gui.result_label.configure(textvariable=self.gui.result)
             self.gui.result_label.configure(textvariable="", text=f"{self.gui.result.get():,}")    
-
-        #print(self.gui.result.get())      
+  
 
     def check(self):
         self.set_number_1()
@@ -68,8 +67,6 @@ class Logic():
             if self.gui.operator.get() == "+":
                 self.gui.result.set(self.gui.number1.get() + self.gui.number2.get())
                 self.gui.result_label.configure(textvariable="", text=f"{self.gui.result.get():,}")
-                print(f"{self.gui.result.get():,}")
-                print("here !")
 
             elif self.gui.operator.get() == "-":
                 self.gui.result.set(self.gui.number1.get() - self.gui.number2.get())
@@ -82,14 +79,7 @@ class Logic():
             elif self.gui.operator.get() == "/":
                 self.gui.result.set(self.gui.number1.get() / self.gui.number2.get())
                 self.gui.result_label.configure(textvariable="", text=f"{self.gui.result.get():,}")
-            
-            print("It comes to this point")
-            #if self.gui.number1_comma_position >= self.gui.number2_comma_position:
-            #    self.gui.result_label.configure(textvariable="", text=f"{self.gui.result.get():.{self.gui.number1_comma_position-1}f}")
-            #else:
-
-
-
+        
 
             self.gui.result_null.set(False)
             self.gui.equal_null.set(False)
@@ -99,18 +89,18 @@ class Logic():
 
     #Clears the Result window except it keeps the result value and puts it in the Number 1 Frame
     def next_calculation(self):
-        print("Start of next_calculation.")
         n1 = self.gui.number1.get()
         n2 = self.gui.number2.get()
         r = self.gui.result.get()
-        print(f"Result of result.get() {self.gui.result.get()}")
+        _, _, r_comma_position = self.getthelength(r)
         self.clear()
+        self.gui.number1_comma_position = r_comma_position + 1
         self.enter_number(r)
         self.gui.entry_at_field_one.set(False)
-        print("End of next_calculation.")
+        self.gui.number1_label.configure(textvariable="", text=f"{r:,.{r_comma_position}f}")
+
 
     def clear(self):
-        print("Start of clear.")
         self.gui.number1_null.set(True)
         self.gui.number1.set("")
         self.gui.number1_label.configure(text="")
@@ -128,7 +118,6 @@ class Logic():
         self.gui.number1_comma_position = 0
         self.gui.number2_comma_position = 0
         self.check()
-        print("End of clear.")
 
 
     def set_operator_window(self, x):
@@ -182,9 +171,11 @@ class Logic():
 
     def comma_pressed(self):        
         if self.gui.entry_at_field_one.get():
-            self.gui.number1_comma_position += 1
+            if self.gui.number1_comma_position == 0:
+                self.gui.number1_comma_position += 1
         else:
-            self.gui.number2_comma_position += 1
+            if self.gui.number2_comma_position == 0:
+                self.gui.number2_comma_position += 1
 
 
     def enter_number(self, x):
@@ -215,9 +206,7 @@ class Logic():
                     self.gui.number2.set(self.gui.number2.get() + x * (0.1 ** self.gui.number2_comma_position))
                     self.gui.number2_comma_position += 1
 
-        print(self.gui.number1.get())
         self.check()
-        print(self.gui.number1.get())
 
     def test(self):
         popup = tk.Toplevel(self.gui.window)
@@ -241,6 +230,22 @@ class Logic():
         popup.geometry(f"{w}x{h}+{x_popup}+{y_popup}")
 
         #popup.
+
+
+
+    def getthelength(self, x) -> tuple[int, int, int]:    
+        if x % 1 == 0:
+            total_length = full_numbers_length = len(str(x))
+            return total_length, full_numbers_length, 0
+        else:
+            total_length = len(str(x)) - 1
+            full_numbers_length, decimal_length = str(x).split(".")
+            full_numbers_length, decimal_length = len(full_numbers_length), len(decimal_length)
+            return total_length, full_numbers_length, decimal_length
+        
+    def is_length_under_9(self, x) -> bool:
+        total_length, _, _ = getthelength(x)
+        return total_length < 9
 
 
     
