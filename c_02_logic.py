@@ -1,5 +1,6 @@
 from decimal import Decimal
 import tkinter as tk
+from tkinter import ttk
 
 class Logic():
 
@@ -201,6 +202,10 @@ class Logic():
 
                     self.gui.number1_comma_position += 1
 
+            if self.gui.number1_null.get() == False and self.is_length_under_9(self.gui.number1.get(), self.gui.number1_comma_position) == False: #Checking if entering exceeds the limit of 8 digits
+                self.over_8_numbers("Number 1")
+                return
+            
         else:                                                               # --- For Number 2 ---
             if self.gui.number2_null.get(): #No number assigned so far
                 self.gui.number2_null.set(False)
@@ -243,22 +248,57 @@ class Logic():
 
         popup.geometry(f"{w}x{h}+{x_popup}+{y_popup}")
 
-        #popup.
+
+    def over_8_numbers(self, a):
+        x = f"Limit for {a} reached"
+        popup = tk.Toplevel(self.gui.window)
+        popup.transient(self.gui.window)
+        popup.grab_set()
+        popup.resizable(False, False)
+        x_window = self.gui.window.winfo_x()
+        y_window = self.gui.window.winfo_y()
+        width_window = self.gui.window.winfo_width()
+        height_window = self.gui.window.winfo_height()
+        popup.iconbitmap("Icon_Calculator_16x16.ico")
+        popup.title(x)
+
+        #Size of popup
+        w = 390
+        h = 150
+
+        #Calculating the middle point of window
+        x_popup = x_window + (width_window - w) // 2
+        y_popup = y_window + (height_window - h) // 2
+
+        popup.geometry(f"{w}x{h}+{x_popup}+{y_popup}")
+
+        popup.columnconfigure(0, weight=1)
+        popup.rowconfigure(0, weight=1)
+        self.warning_label = ttk.Label(popup, anchor="center", justify="center") 
+        self.warning_label.grid(row=0, column=0)
+        self.warning = tk.StringVar()
+        self.warning.set("To keep the design simple, the maximum number of digits is set to 8. \n It seems you wanted to go far and beyond. \n Dont. :)")
+        self.warning_label.configure(textvariable=self.warning)
+        self.warning_label.grid(row=0, column=0)
+        self.clear()
 
 
 
-    def getthelength(self, x) -> tuple[int, int, int]:    
+    def getthelength(self, x, commaposition) -> tuple[int, int, int]:    
         if x % 1 == 0:
+            x = int(x)
             total_length = full_numbers_length = len(str(x))
             return total_length, full_numbers_length, 0
         else:
+            x = float(str(f"{x:{commaposition}.f}"))
             total_length = len(str(x)) - 1
             full_numbers_length, decimal_length = str(x).split(".")
             full_numbers_length, decimal_length = len(full_numbers_length), len(decimal_length)
             return total_length, full_numbers_length, decimal_length
         
-    def is_length_under_9(self, x) -> bool:
-        total_length, _, _ = getthelength(x)
+    def is_length_under_9(self, x, commaposition) -> bool:
+        total_length, _, _ = self.getthelength(x, commaposition)
+        print(f"The length of the current number: {self.gui.number1.get()} is: {total_length}")
         return total_length < 9
 
 
