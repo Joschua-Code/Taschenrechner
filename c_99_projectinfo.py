@@ -10,7 +10,6 @@
 
 
 #Known Bugs
-# 1 - After Plus Minus is pressed its possible to still enter numbers that then get falsely added instead of substracted
-    #Idea for solution is checking when inserting/pressing number if current Value is negative then substract otherwise normal add
-# 2 - Result not keeping the max Numbers of 8 - Example of not working atm (5900 / 12)
+# 1 - Result not keeping the max Numbers of 8 - Example of not working atm (5900 / 12)
+# 2 - -------------------- A bunch of nothing --------------------
 # 3 - -------------------- A bunch of nothing --------------------

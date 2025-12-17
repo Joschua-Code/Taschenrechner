@@ -189,9 +189,16 @@ class Logic():
                 self.gui.number1.set(x)
             else:
                 if self.gui.number1_comma_position == 0:    #Not a decimal Number
-                    self.gui.number1.set(self.gui.number1.get() * 10 + x)
+                    if self.gui.number1.get() >= 0: #Checks if the Number is positive or negative and then adds or substracts accordingly - 1v2
+                        self.gui.number1.set(self.gui.number1.get() * 10 + x)
+                    else: #Checks if the Number is positive or negative and then adds or substracts accordingly - 2v2
+                        self.gui.number1.set(self.gui.number1.get() * 10 - x)
                 else:                                       #The new number shall be fractional
-                    self.gui.number1.set(self.gui.number1.get() + x * (0.1 ** self.gui.number1_comma_position)) 
+                    if self.gui.number1.get() >= 0: #Checks if the Number is positive or negative and then adds or substracts accordingly - 1v2
+                        self.gui.number1.set(self.gui.number1.get() + x * (0.1 ** self.gui.number1_comma_position)) 
+                    else: #Checks if the Number is positive or negative and then adds or substracts accordingly - 2v2
+                        self.gui.number1.set(self.gui.number1.get() - x * (0.1 ** self.gui.number1_comma_position)) 
+
                     self.gui.number1_comma_position += 1
 
         else:                                                               # --- For Number 2 ---
@@ -201,9 +208,16 @@ class Logic():
 
             else:
                 if self.gui.number2_comma_position == 0: #Not a decimal Number
-                    self.gui.number2.set(self.gui.number2.get() * 10 + x)
+                    if self.gui.number2.get() >= 0: #Checks if the Number is positive or negative and then adds or substracts accordingly - 1v2
+                        self.gui.number2.set(self.gui.number2.get() * 10 + x)
+                    else: #Checks if the Number is positive or negative and then adds or substracts accordingly - 2v2
+                        self.gui.number2.set(self.gui.number2.get() * 10 - x)
+
                 else:                                    #The new number shall be fractional
-                    self.gui.number2.set(self.gui.number2.get() + x * (0.1 ** self.gui.number2_comma_position))
+                    if self.gui.number2.get() >= 0: #Checks if the Number is positive or negative and then adds or substracts accordingly - 1v2
+                        self.gui.number2.set(self.gui.number2.get() + x * (0.1 ** self.gui.number2_comma_position))
+                    else: #Checks if the Number is positive or negative and then adds or substracts accordingly - 2v2
+                        self.gui.number2.set(self.gui.number2.get() - x * (0.1 ** self.gui.number2_comma_position))
                     self.gui.number2_comma_position += 1
 
         self.check()
