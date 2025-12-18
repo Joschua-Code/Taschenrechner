@@ -1,6 +1,7 @@
 from decimal import Decimal
 import tkinter as tk
 from tkinter import ttk
+from c_03_utils import as_decimal
 
 class Logic():
 
@@ -21,7 +22,7 @@ class Logic():
             return
         
         if self.gui.number1_comma_position == 0:
-            self.gui.number1_label.configure(textvariable="", text=f"{self.gui.number1.get():,.0f}")
+            self.gui.number1.set(textvariable="", text=f"{self.gui.number1.get():,.0f}")
         else:       
             self.gui.number1_label.configure(textvariable="", text=f"{self.gui.number1.get():,.{self.gui.number1_comma_position-1}f}")
 
@@ -180,23 +181,24 @@ class Logic():
 
 
     def enter_number(self, x):
-        if self.gui.result_null.get() != True: #Checks if Result is Null if not it blocks entering a Number after already calculating
+        if self.gui.result.get() == "": #Checks if Result is Null if not it blocks entering a Number after already calculating
             return
         
         if self.gui.entry_at_field_one.get():                               # --- For Number 1 ---
-
-            if self.gui.number1_null.get(): #No number assigned so far
-                self.gui.number1_null.set(False)
+            #n1 = lambda: as_decimal(self.gui.number1.get())                                                   ----------------------------------- Current Place of Work
+            #set_n1 = lambda var: self.gui.number1.set(var)
+            if self.gui.number1.get() == "": #No number assigned so far
                 self.gui.number1.set(x)
+                #print(f"Its at enter number point and the type of the entering is: {type(x)}")
             else:
                 if self.gui.number1_comma_position == 0:    #Not a decimal Number
-                    if self.gui.number1.get() >= 0: #Checks if the Number is positive or negative and then adds or substracts accordingly - 1v2
-                        self.gui.number1.set(self.gui.number1.get() * 10 + x)
+                    if as_decimal(self.gui.number1.get()) >= 0: #Checks if the Number is positive or negative and then adds or substracts accordingly - 1v2
+                        self.gui.number1.set(as_decimal(self.gui.number1.get()) * 10 + x)
                     else: #Checks if the Number is positive or negative and then adds or substracts accordingly - 2v2
-                        self.gui.number1.set(self.gui.number1.get() * 10 - x)
+                        self.gui.number1.set(as_decimal(self.gui.number1.get()) * 10 - x)
                 else:                                       #The new number shall be fractional
-                    if self.gui.number1.get() >= 0: #Checks if the Number is positive or negative and then adds or substracts accordingly - 1v2
-                        self.gui.number1.set(self.gui.number1.get() + x * (0.1 ** self.gui.number1_comma_position)) 
+                    if as_decimal(self.gui.number1.get()) >= 0: #Checks if the Number is positive or negative and then adds or substracts accordingly - 1v2
+                        self.gui.number1.set(as_decimal(self.gui.number1.get()) + x * (as_decimal(0.1) ** self.gui.number1_comma_position)) 
                     else: #Checks if the Number is positive or negative and then adds or substracts accordingly - 2v2
                         self.gui.number1.set(self.gui.number1.get() - x * (0.1 ** self.gui.number1_comma_position)) 
 

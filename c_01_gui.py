@@ -3,6 +3,7 @@ from tkinter import ttk
 import sys
 import c_02_logic
 from decimal import Decimal
+from c_03_utils import as_decimal
 
 class GUI:
     def __init__(self):
@@ -40,7 +41,7 @@ class GUI:
         self.number1_label.grid(row=0, column=0)
 
         #Resultframe - (Number 1) - Creation of Variable
-        self.number1 = tk.DoubleVar()
+        self.number1 = tk.StringVar()
         self.number1.set("")
         self.number1_label.configure(textvariable=self.number1)
 
@@ -72,7 +73,7 @@ class GUI:
         self.number2_label.grid(row=0, column=2)
 
         #Resultframe - (Number 2) - Creation of Variable
-        self.number2 = tk.DoubleVar()
+        self.number2 = tk.StringVar()
         self.number2.set("")
 
         #Resultframe - (Number 2) - Boolean for checking if Variable is initialized
@@ -207,13 +208,6 @@ class GUI:
             self.item = ttk.Button(
                 self.window,
                 text = value["num"],
-                command = lambda x = value["num"]: self.logic.enter_number(x)
+                command = lambda x = value["num"]: self.logic.enter_number(as_decimal(x))
             )
             self.item.grid(row = value["row"], column = value["column"])
-
-
-
-        #Closes the program at this point.
-        #sys.exit(0)
-
-
