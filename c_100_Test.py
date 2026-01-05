@@ -9,8 +9,7 @@ def as_decimal(x):
         return Decimal(x)
     raise TypeError(f"Unsupported type: {type(x).__name__}")
 
-p = 1
-x = lambda: p * 2
 
-p = 5
-print(x())
+x = "10.1"
+
+print(Decimal("1"))

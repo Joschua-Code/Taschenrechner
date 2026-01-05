@@ -98,8 +98,8 @@ class GUI:
         self.result_null = tk.BooleanVar()
         self.result_null.set(True)
 
-        self.result = tk.DoubleVar()
-        self.result.set(0)
+        self.result = tk.StringVar()
+        self.result.set("")
 
         self.result_label = ttk.Label(self.ergebnisfenster)
         self.result_label.grid(row=0, column=4)
