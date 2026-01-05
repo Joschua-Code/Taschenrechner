@@ -20,7 +20,7 @@ class Logic():
 
 
     def set_number_1(self): #Only to be called by enter_number()
-        if self.gui.number1_null.get() == True:
+        if self.gui.number1.get() == "":
             return
         
         if self.gui.number1_comma_position == 0:
@@ -31,7 +31,7 @@ class Logic():
 
     def set_operator(self):
 
-        if self.gui.operator_null.get():
+        if self.gui.operator.get() == "":
             self.gui.operator_label.configure(textvariable=self.gui.operator)
 
         else:
@@ -40,7 +40,7 @@ class Logic():
 
     def set_number_2(self): #Only to be called by enter_number()
 
-        if self.gui.number2_null.get() == True:
+        if self.gui.number2.get() == "":
             return
         
         if self.gui.number2_comma_position == 0:
@@ -52,7 +52,7 @@ class Logic():
 
     def set_equal(self):
 
-        if self.gui.equal_null.get():
+        if self.gui.equal.get() == "":
             self.gui.equal_label.configure(textvariable=self.gui.equal)
 
         else:
@@ -61,7 +61,7 @@ class Logic():
 
     def set_result(self):
 
-        if self.gui.result_null.get():
+        if self.gui.result.get() == "":
             self.gui.result.set("")
 
         elif self.gui.result.get() % 1 == 0:
@@ -98,8 +98,6 @@ class Logic():
                 self.gui.result.set(f"{Decimal(self.gui.number1.get()) / Decimal(self.gui.number2.get())}")
     
             self.gui.equal.set("=")
-            self.gui.equal_null.set(False)
-            self.gui.result_null.set(False)
             self.check()
 
 
@@ -119,15 +117,10 @@ class Logic():
 
     def clear(self):
 
-        self.gui.number1_null.set(True)
         self.gui.number1.set("")
-        self.gui.operator_null.set(True)
         self.gui.operator.set("")
-        self.gui.number2_null.set(True)
         self.gui.number2.set("")
-        self.gui.equal_null.set(True)
         self.gui.equal.set("")
-        self.gui.result_null.set(True)
         self.gui.result.set("")
         self.gui.entry_at_field_one.set(True)
         self.gui.number1_comma_position = 0
@@ -140,10 +133,9 @@ class Logic():
         if self.gui.number1.get() == "":
             return
         
-        self.gui.operator_null.set(False)
         self.gui.entry_at_field_one.set(False)
 
-        if self.gui.result_null.get():
+        if self.gui.result.get() == "":
             if x == "/":
                 self.gui.operator.set("/")
             elif x == "x":
@@ -168,14 +160,14 @@ class Logic():
         
 
     def change_plus_minus(self):
-        if self.gui.result_null.get() != True: #Checks if Result is Null if not it blocks entering a Number after already calculating
+        if self.gui.result.get() != "": #Checks if Result is Null/Empty if not it blocks entering a Number after already calculating
             return
         
         if self.gui.entry_at_field_one.get():
-            if self.gui.number1.get() == 0:
+            if self.gui.number1.get() == "":
                 return
             else:
-                self.gui.number1.set(self.gui.number1.get() * -1)
+                self.gui.number1.set(f"{Decimal(self.gui.number1.get()) * -1}")
                 self.set_number_1()
         else:
             if self.gui.number2.get() == 0:
@@ -220,13 +212,12 @@ class Logic():
 
                     self.gui.number1_comma_position += 1
 
-            if self.gui.number1_null.get() == False and self.is_length_under_9(self.gui.number1.get(), self.gui.number1_comma_position) == False: #Checking if entering exceeds the limit of 8 digits
+            if self.gui.number1.get() == "" and self.is_length_under_9(self.gui.number1.get(), self.gui.number1_comma_position) == False: #Checking if entering exceeds the limit of 8 digits
                 self.over_8_numbers("Number 1")
                 return
             
         else:                                                               # --- For Number 2 ---
-            if self.gui.number2_null.get(): #No number assigned so far
-                self.gui.number2_null.set(False)
+            if self.gui.number2.get() == "": #No number assigned so far
                 self.gui.number2.set(x)
 
             else:

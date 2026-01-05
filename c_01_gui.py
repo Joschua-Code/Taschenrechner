@@ -45,13 +45,8 @@ class GUI:
         self.number1.set("")
         self.number1_label.configure(textvariable=self.number1)
 
-        #Resultframe - (Number 1) - Boolean for checking if Variable is initialized
-        self.number1_null = tk.BooleanVar()
-        self.number1_null.set(True)
-
         #Commaposition of Number 1
         self.number1_comma_position = 0
-
 
         #Resultframe - (Operator) - Creation of Label
         self.operator_label = ttk.Label(self.ergebnisfenster)
@@ -60,10 +55,6 @@ class GUI:
         #Resultframe - (Operator) - Creation of Variable
         self.operator = tk.StringVar()
         self.operator.set("")
-
-        #Resultframe - (Operator) - Boolean for checking if Variable is initialized
-        self.operator_null = tk.BooleanVar()
-        self.operator_null.set(True)
 
         #Commaposition of Number 2
         self.number2_comma_position = 0
@@ -76,11 +67,6 @@ class GUI:
         self.number2 = tk.StringVar()
         self.number2.set("")
 
-        #Resultframe - (Number 2) - Boolean for checking if Variable is initialized
-        self.number2_null = tk.BooleanVar()
-        self.number2_null.set(True)
-
-
         #Resultframe - (Equal) - Creation of Label
         self.equal_label = ttk.Label(self.ergebnisfenster)
         self.equal_label.grid(row=0, column=3)
@@ -89,15 +75,8 @@ class GUI:
         self.equal = tk.StringVar()
         self.equal.set("")
 
-        #Resultframe - (Equal) - Boolean for checking if Variable is initialized
-        self.equal_null = tk.BooleanVar()
-        self.equal_null.set(True)
-
 
         #Resultframe - (Result)
-        self.result_null = tk.BooleanVar()
-        self.result_null.set(True)
-
         self.result = tk.StringVar()
         self.result.set("")
 
