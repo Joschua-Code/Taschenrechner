@@ -25,73 +25,78 @@ class GUI:
         self.window.iconbitmap("Icon_Calculator_16x16.ico")
 
 
-        #Resultframe - (Number 1 - Operator - Number 2 - Result)
-
         #Resultframe
         self.ergebnisfenster = tk.Frame(self.window)
         self.ergebnisfenster.grid(row=0, column=0, columnspan=4, sticky="ew")
         self.ergebnisfenster.grid_columnconfigure((0,1,2,3,4), weight=1, uniform="cols")
 
 
-        #Pointer to the current entryfield
+        #   Pointer to the current entryfield
         self.entry_at_field_one = tk.BooleanVar(value = True)
 
-        #Resultframe - (Number 1) - Creation of Label
-        self.number1_label = ttk.Label(self.ergebnisfenster) 
-        self.number1_label.grid(row=0, column=0)
 
-        #Resultframe - (Number 1) - Creation of Variable
-        self.number1 = tk.StringVar()
-        self.number1.set("")
-        self.number1_label.configure(textvariable=self.number1)
+        #   Number 1 
 
-        #Commaposition of Number 1
+        #       Variable
+        self.number1 = tk.StringVar(value="")
+
+        #       Commaposition
         self.number1_comma_position = 0
 
-        #Resultframe - (Operator) - Creation of Label
-        self.operator_label = ttk.Label(self.ergebnisfenster)
+        #       Label
+        self.number1_label = ttk.Label(self.ergebnisfenster, textvariable=self.number1) 
+        self.number1_label.grid(row=0, column=0)
+
+
+        #   Operator
+
+        #       Variable
+        self.operator = tk.StringVar(value="")
+
+        #       Label
+        self.operator_label = ttk.Label(self.ergebnisfenster, textvariable=self.operator)
         self.operator_label.grid(row=0, column=1)
 
-        #Resultframe - (Operator) - Creation of Variable
-        self.operator = tk.StringVar()
-        self.operator.set("")
 
-        #Commaposition of Number 2
+        #   Number 2
+
+        #       Variable
+        self.number2 = tk.StringVar(value="")
+
+        #       Commaposition
         self.number2_comma_position = 0
 
-        #Resultframe - (Number 2) - Creation of Label
-        self.number2_label = ttk.Label(self.ergebnisfenster)
+        #       Label
+        self.number2_label = ttk.Label(self.ergebnisfenster, textvariable=self.number2)
         self.number2_label.grid(row=0, column=2)
 
-        #Resultframe - (Number 2) - Creation of Variable
-        self.number2 = tk.StringVar()
-        self.number2.set("")
-
-        #Resultframe - (Equal) - Creation of Label
-        self.equal_label = ttk.Label(self.ergebnisfenster)
-        self.equal_label.grid(row=0, column=3)
         
-        #Resultframe - (Equal) - Creation of Variable
-        self.equal = tk.StringVar()
-        self.equal.set("")
+        #   Equal
+
+        #       Variable
+        self.equal = tk.StringVar(value="")
+
+        #       Label
+        self.equal_label = ttk.Label(self.ergebnisfenster, textvariable=self.equal)
+        self.equal_label.grid(row=0, column=3)
 
 
-        #Resultframe - (Result)
-        self.result = tk.StringVar()
-        self.result.set("")
+        #   Result
 
-        self.result_label = ttk.Label(self.ergebnisfenster)
+        #       Variable
+        self.result = tk.StringVar(value="")
+
+        #       Label
+        self.result_label = ttk.Label(self.ergebnisfenster, textvariable=self.result)
         self.result_label.grid(row=0, column=4)
 
 
         #Distanceholderframe
-        self.distance_holder_label = ttk.Label(self.window)
+        self.distance_holder_label = ttk.Label(self.window, text="")
         self.distance_holder_label.grid(row=1, column=0)
-        self.distance_holder_label.configure(textvariable="")
 
 
         #Buttons
-
         self.clear_button = ttk.Button(
             self.window, 
             text="C", 

@@ -7,78 +7,9 @@ class Logic():
 
     def __init__(self, gui_instance):
         self.gui = gui_instance #Here the reference to the instance of the class gui gets saved
-        self.set_number_1()
-        self.set_operator()
-        self.set_number_2()
-        self.set_equal()
-        self.set_result()
-        self.check()
     
-
     def set_history_instance(self, history_instance):
         self.history = history_instance
-
-
-    def set_number_1(self): #Only to be called by enter_number()
-        if self.gui.number1.get() == "":
-            return
-        
-        if self.gui.number1_comma_position == 0:
-            self.gui.number1.set(f"{Decimal(self.gui.number1.get()):,.0f}")
-        else:       
-            self.gui.number1.set(f"{Decimal(self.gui.number1.get()):,.{self.gui.number1_comma_position-1}f}")
-
-
-    def set_operator(self):
-
-        if self.gui.operator.get() == "":
-            self.gui.operator_label.configure(textvariable=self.gui.operator)
-
-        else:
-            self.gui.operator_label.configure(textvariable=self.gui.operator)
-    
-
-    def set_number_2(self): #Only to be called by enter_number()
-
-        if self.gui.number2.get() == "":
-            return
-        
-        if self.gui.number2_comma_position == 0:
-            self.gui.number2.set(f"{Decimal(self.gui.number2.get()):,.0f}")
-
-        else:       
-            self.gui.number2.set(f"{Decimal(self.gui.number2.get()):,.{self.gui.number2_comma_position-1}f}")
-    
-
-    def set_equal(self):
-
-        if self.gui.equal.get() == "":
-            self.gui.equal_label.configure(textvariable=self.gui.equal)
-
-        else:
-            self.gui.equal_label.configure(textvariable=self.gui.equal)
-
-
-    def set_result(self):
-
-        if self.gui.result.get() == "":
-            self.gui.result.set("")
-
-        elif self.gui.result.get() % 1 == 0:
-            self.gui.result.set(f"{Decimal(self.gui.result.get()):,.0f}")
-
-        else:
-            self.gui.result_label.configure(textvariable=self.gui.result)
-            self.gui.result_label.configure(textvariable="", text=f"{self.gui.result.get():,}")    
-  
-
-    def check(self):
-
-        self.set_number_1()
-        self.set_operator()
-        self.set_number_2()
-        self.set_equal()
-        self.set_result()
 
 
     def calculate(self):
@@ -98,7 +29,7 @@ class Logic():
                 self.gui.result.set(f"{Decimal(self.gui.number1.get()) / Decimal(self.gui.number2.get())}")
     
             self.gui.equal.set("=")
-            self.check()
+
 
 
     #Clears the result window except it keeps the result value and puts it in the number 1 frame
@@ -125,16 +56,13 @@ class Logic():
         self.gui.entry_at_field_one.set(True)
         self.gui.number1_comma_position = 0
         self.gui.number2_comma_position = 0
-        self.check()
 
 
     def set_operator_window(self, x):
-
         if self.gui.number1.get() == "":
             return
         
         self.gui.entry_at_field_one.set(False)
-
         if self.gui.result.get() == "":
             if x == "/":
                 self.gui.operator.set("/")
@@ -156,7 +84,7 @@ class Logic():
             elif x == "+":
                 self.gui.operator.set("+")
 
-        self.check()
+
         
 
     def change_plus_minus(self):
@@ -168,13 +96,11 @@ class Logic():
                 return
             else:
                 self.gui.number1.set(f"{Decimal(self.gui.number1.get()) * -1}")
-                self.set_number_1()
         else:
-            if self.gui.number2.get() == 0:
+            if self.gui.number2.get() == "":
                 return
             else:
-                self.gui.number2.set(self.gui.number2.get() * -1)
-                self.set_number_2()
+                self.gui.number2.set(f"{Decimal(self.gui.number2.get()) * -1}")
 
 
     def comma_pressed(self):        
@@ -217,8 +143,10 @@ class Logic():
                 return
             
         else:                                                               # --- For Number 2 ---
+
             if self.gui.number2.get() == "": #No number assigned so far
-                self.gui.number2.set(x)
+                print(f"[enter_number] The Value for x that is to be inserted into Number2 is: {x}")
+                self.gui.number2.set(f"{x}")
 
             else:
                 if self.gui.number2_comma_position == 0: #Not a decimal Number
@@ -234,7 +162,7 @@ class Logic():
                         self.gui.number2.set(self.gui.number2.get() - x * (0.1 ** self.gui.number2_comma_position))
                     self.gui.number2_comma_position += 1
 
-        self.check()
+
 
 
     def test(self):

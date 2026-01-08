@@ -1,4 +1,14 @@
 from decimal import Decimal
 
+def test1():
+    x = 10
+    x = test0()
+    return x
 
-print(Decimal(100) + Decimal("0.2"))
+
+def test0():
+    x = 11
+    return 11
+
+
+print(test1())
