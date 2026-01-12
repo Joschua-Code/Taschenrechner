@@ -7,6 +7,7 @@
 #Giving the Backbutton his funktion
 #Implementing a History Button that displays all Calculations
 #Checking if everything is commented nice
+#Replace the English 
 
 
 #Known Bugs

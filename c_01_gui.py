@@ -5,6 +5,8 @@ import c_02_logic
 from decimal import Decimal
 from c_03_utils import as_decimal
 
+
+
 class GUI:
     def __init__(self):
         
@@ -91,12 +93,12 @@ class GUI:
         self.result_label.grid(row=0, column=4)
 
 
-        #Distanceholderframe
+        # Distanceholderframe
         self.distance_holder_label = ttk.Label(self.window, text="")
         self.distance_holder_label.grid(row=1, column=0)
 
 
-        #Buttons
+        # Buttons
         self.clear_button = ttk.Button(
             self.window, 
             text="C", 
@@ -176,7 +178,7 @@ class GUI:
         )
         self.equal_button.grid(row=7, column=3)
 
-        #The buttons 0 to 9 get initialized.
+        #   Buttons 0 to 9
         self.numbers = {"Button_0" : {"num": 0, "row" : 7, "column" : 1},
                 "Button_1" : {"num": 1, "row" : 6, "column" : 0},
                 "Button_2" : {"num": 2, "row" : 6, "column" : 1},
