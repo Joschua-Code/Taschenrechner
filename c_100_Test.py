@@ -4,18 +4,18 @@ from decimal import Decimal
 
 
 
+x2 = 12332122
 
 
-
-x = "-123123.562345"
-x = x.removeprefix("-")
-
-
-
+x = f"{x2}"
 
 
 
 
+#es muss mindestens auf 2 nachkommastellen gerundet werden ansonsten kommt Fehlerfenster
+#Fehlerfenster hat aberauch das Ergebnis
+
+#hilfsfunktion für result gibt 
 
 
 
@@ -23,4 +23,26 @@ x = x.removeprefix("-")
 
 
 
-print(x)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+print(f"X hat den Typ: {type(x)} und den Wert: {x}")

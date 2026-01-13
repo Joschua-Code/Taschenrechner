@@ -21,7 +21,10 @@ class Logic():
         if self.gui.operator.get() != "" and self.gui.number2.get() != "":
 
             if self.gui.operator.get() == "+":
-                self.gui.result.set(f"{Decimal(self.gui.number1.get()) + Decimal(self.gui.number2.get())}")
+                result = f"{Decimal(self.gui.number1.get()) + Decimal(self.gui.number2.get())}"
+                if self.calculate_result_check(result):
+                    self.gui.result.set(result)
+
 
             elif self.gui.operator.get() == "-":
                 self.gui.result.set(f"{Decimal(self.gui.number1.get()) - Decimal(self.gui.number2.get())}")
@@ -33,6 +36,11 @@ class Logic():
                 self.gui.result.set(f"{Decimal(self.gui.number1.get()) / Decimal(self.gui.number2.get())}")
     
             self.gui.equal.set("=")
+
+    def calculate_result_check(self, x):
+        if self.is_length_under_9(x):
+            return True
+        
 
 
     #Clears the result window except it keeps the result value and puts it in the number 1 frame
@@ -165,6 +173,10 @@ class Logic():
                         self.gui.number2.set(str(as_decimal(self.gui.number2.get()) - x * (as_decimal(0.1) ** self.gui.number2_comma_position)))
 
                     self.gui.number2_comma_position += 1
+
+            if self.gui.number2.get() != "" and self.is_length_under_9(self.gui.number2.get()) == False: #Checking if entering exceeds the limit of 8 digits
+                self.over_8_numbers("Number 2")
+                return
 
 
     def test(self):
