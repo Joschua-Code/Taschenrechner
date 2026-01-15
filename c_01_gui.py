@@ -166,7 +166,7 @@ class GUI:
         self.comma_button = ttk.Button(
             self.window,
             text=".",
-            command=lambda: self.logic.comma_pressed()
+            command=lambda: self.logic.comma_pressed
         )
         self.comma_button.grid(row=7, column=2)
 
@@ -197,3 +197,14 @@ class GUI:
                 command = lambda x = value["num"]: self.logic.enter_number(as_decimal(x))
             )
             self.item.grid(row = value["row"], column = value["column"])
+
+        self.window.bind_all("<KeyPress>", self.keyboard_input)
+
+    def keyboard_input(self, event):
+        if event.char.isdigit():
+            print("You pressed: ", event.char)
+            self.logic.enter_number(as_decimal(event.char))
+
+        if event.keysym == "Return":
+            self.logic.calculate()
+    
