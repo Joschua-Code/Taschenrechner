@@ -298,6 +298,18 @@ class Logic():
         to_reduce_number = 8 - full_numbers_length
 
         return (str(round(Decimal(result), to_reduce_number)))
+    
+    def backspace(self):
+        if self.gui.result.get() != "":
+            return
+        
+        if self.gui.entry_at_field_one.get(): #Field 1
+            self.gui.number1.set(str(self.gui.number1.get())[:-1])
+
+        if not self.gui.entry_at_field_one.get(): #Field 2
+            self.gui.number2.set(str(self.gui.number2.get())[:-1])
+
+
 
             
 

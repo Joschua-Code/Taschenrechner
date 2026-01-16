@@ -1,4 +1,5 @@
 from decimal import Decimal
+x = None
 
 
 
@@ -20,4 +21,17 @@ from decimal import Decimal
 
 
 
-print(f"x hat den Typ: {type(x)} und den Wert: {x}")
+
+
+
+
+
+
+
+
+
+
+
+
+
+print(f"x is type: {type(x)} und and has the value: {x}")
