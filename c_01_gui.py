@@ -110,14 +110,14 @@ class GUI:
         self.back_button = ttk.Button(
             self.window, 
             text="⌫", 
-            #command=lambda: ---------------------------------------------- ᕦ(＾O＾)ᕥ WORK IN PROGRESS ᕦ(＾O＾)ᕥ ----------------------------------------------                                   
+            command=lambda: self.logic.backspace()
             )
         self.back_button.grid(row=3, column=1)
 
 
         self.history_button = ttk.Button(
             self.window, 
-            text="☰Test☰", 
+            text="WIP", #☰ Symbol for possible HistoryButton
             command=lambda: self.logic.over_8_numbers()
             )
         self.history_button.grid(row=3, column=2)
@@ -220,7 +220,7 @@ class GUI:
                 self.logic.comma_pressed()
             
             case "BackSpace":
-                pass #WIP
+                self.logic.backspace()
                 
 
                     
