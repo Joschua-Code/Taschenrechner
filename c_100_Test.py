@@ -3,15 +3,6 @@ from decimal import Decimal
 
 
 
-
-x2 = 12332122
-
-
-x = f"{x2}"
-
-
-
-
 #es muss mindestens auf 2 nachkommastellen gerundet werden ansonsten kommt Fehlerfenster
 #Fehlerfenster hat aberauch das Ergebnis
 
@@ -21,6 +12,13 @@ x = f"{x2}"
 
 
 
+def test(x):
+    if x % 2 == 0:
+        return True
+    else:
+        return False
+    
+x = test(11)
 
 
 
@@ -45,4 +43,12 @@ x = f"{x2}"
 
 
 
-print(f"X hat den Typ: {type(x)} und den Wert: {x}")
+
+
+
+
+
+
+
+
+print(f"x hat den Typ: {type(x)} und den Wert: {x}")
