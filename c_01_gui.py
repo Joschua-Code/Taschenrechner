@@ -216,6 +216,8 @@ class GUI:
             case "KP_Multiply":
                 self.logic.set_operator_window("*")
 
+            case "comma" | "period":
+                self.logic.comma_pressed()
             
             case "BackSpace":
                 pass #WIP
