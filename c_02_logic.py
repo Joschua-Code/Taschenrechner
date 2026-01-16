@@ -22,24 +22,42 @@ class Logic():
 
             if self.gui.operator.get() == "+":
                 result = f"{Decimal(self.gui.number1.get()) + Decimal(self.gui.number2.get())}"
-                if self.calculate_result_check(result):
-                    self.gui.result.set(result)
+                if self.my_round(result):
+                    return
+                
 
 
             elif self.gui.operator.get() == "-":
                 self.gui.result.set(f"{Decimal(self.gui.number1.get()) - Decimal(self.gui.number2.get())}")
 
             elif self.gui.operator.get() == "x":
-                self.gui.result.set(f"{Decimal(self.gui.number1.get()) * Decimal(self.gui.number2.get())}")
+                temp = f"{Decimal(self.gui.number1.get()) * Decimal(self.gui.number2.get())}"
+                if self.is_length_under_9(temp) == False:
+                    self.gui.result.set(f"{Decimal(self.gui.number1.get()) * Decimal(self.gui.number2.get())}")
+                
 
             elif self.gui.operator.get() == "/":
                 self.gui.result.set(f"{Decimal(self.gui.number1.get()) / Decimal(self.gui.number2.get())}")
+                result = f"{Decimal(self.gui.number1.get()) + Decimal(self.gui.number2.get())}"
+                if self.rounding(result):
+                    return
     
             self.gui.equal.set("=")
 
-    def calculate_result_check(self, x):
-        if self.is_length_under_9(x):
+    def calculate_result_check(self, result):
+        if self.is_length_under_9(result):
             return True
+        
+    def rounding(self, result):
+        if self.calculate_result_check(result):
+            self.gui.result.set(result)
+        elif(self.round(result) != "Too Long"):
+            self.gui.result.set(self.round(result))
+        else:
+            self.over_8_numbers("Result")
+            return True
+
+
         
 
 
@@ -254,4 +272,15 @@ class Logic():
         return total_length <= 8
 
 
-    
+    def my_round(self, result):
+
+        _, full_numbers_length, _ = self.getthelength(result)
+        if full_numbers_length > 6:
+            return "Too Long"
+
+        to_reduce_number = 8 - full_numbers_length
+
+        return (str(round(Decimal(result), to_reduce_number)))
+
+            
+
