@@ -22,45 +22,62 @@ class Logic():
 
             if self.gui.operator.get() == "+":
                 result = f"{Decimal(self.gui.number1.get()) + Decimal(self.gui.number2.get())}"
-                if self.my_round(result):
-                    return
-                
-
+                if self.calculate_result_check(result):
+                    self.gui.result.set(str(result))
+                else:
+                    if self.my_round(result) == "Too Long":
+                        self.over_8_numbers("Result")
+                        return
+                    else:
+                        result = self.my_round(result)
+                        self.gui.result.set(str(result))
 
             elif self.gui.operator.get() == "-":
-                self.gui.result.set(f"{Decimal(self.gui.number1.get()) - Decimal(self.gui.number2.get())}")
+                result = f"{Decimal(self.gui.number1.get()) - Decimal(self.gui.number2.get())}"
+                if self.calculate_result_check(result):
+                    self.gui.result.set(str(result))
+                else:
+                    if self.my_round(result) == "Too Long":
+                        self.over_8_numbers("Result")
+                        return
+                    else:
+                        result = self.my_round(result)
+                        self.gui.result.set(str(result))
 
             elif self.gui.operator.get() == "x":
-                temp = f"{Decimal(self.gui.number1.get()) * Decimal(self.gui.number2.get())}"
-                if self.is_length_under_9(temp) == False:
-                    self.gui.result.set(f"{Decimal(self.gui.number1.get()) * Decimal(self.gui.number2.get())}")
-                
+                result = f"{Decimal(self.gui.number1.get()) * Decimal(self.gui.number2.get())}"
+                if self.calculate_result_check(result):
+                    self.gui.result.set(str(result))
+                else:
+                    if self.my_round(result) == "Too Long":
+                        self.over_8_numbers("Result")
+                        return
+                    else:
+                        result = self.my_round(result)
+                        self.gui.result.set(str(result))
 
             elif self.gui.operator.get() == "/":
-                self.gui.result.set(f"{Decimal(self.gui.number1.get()) / Decimal(self.gui.number2.get())}")
-                result = f"{Decimal(self.gui.number1.get()) + Decimal(self.gui.number2.get())}"
-                if self.rounding(result):
-                    return
+                result = f"{Decimal(self.gui.number1.get()) / Decimal(self.gui.number2.get())}"
+                if self.calculate_result_check(result):
+                    self.gui.result.set(str(result))
+                else:
+                    if self.my_round(result) == "Too Long":
+                        self.over_8_numbers("Result")
+                        return
+                    else:
+                        result = self.my_round(result)
+                        self.gui.result.set(str(result))
     
             self.gui.equal.set("=")
+
 
     def calculate_result_check(self, result):
         if self.is_length_under_9(result):
             return True
-        
-    def rounding(self, result):
-        if self.calculate_result_check(result):
-            self.gui.result.set(result)
-        elif(self.round(result) != "Too Long"):
-            self.gui.result.set(self.round(result))
         else:
-            self.over_8_numbers("Result")
-            return True
-
+            return False
 
         
-
-
     #Clears the result window except it keeps the result value and puts it in the number 1 frame
     def next_calculation(self):
 
