@@ -10,10 +10,7 @@ class Logic():
 
     def __init__(self, gui_instance):
         self.gui = gui_instance #Here the reference to the instance of the class gui gets saved
-    
-
-    def set_history_instance(self, history_instance):
-        self.history = history_instance
+        self.history_list = list()
 
 
     def calculate(self):
@@ -80,9 +77,6 @@ class Logic():
         
     #Clears the result window except it keeps the result value and puts it in the number 1 frame
     def next_calculation(self):
-
-        #n1 = Decimal(self.gui.number1.get()) #WIP for historybutton
-        #n2 = Decimal(self.gui.number2.get()) #WIP for historybutton
         r = Decimal(self.gui.result.get())
         _, _, r_comma_position = self.getthelength(r)
 
@@ -93,7 +87,7 @@ class Logic():
 
 
     def clear(self):
-
+        self.history(self.gui.number1.get(), self.gui.operator.get(), self.gui.number2.get(), self.gui.result.get())
         self.gui.number1.set("")
         self.gui.operator.set("")
         self.gui.number2.set("")
@@ -214,26 +208,26 @@ class Logic():
                 return
 
 
-    def test(self):
-        popup = tk.Toplevel(self.gui.window)
-        popup.transient(self.gui.window)
-        popup.grab_set()
-        popup.resizable(False, False)
-        x_window = self.gui.window.winfo_x()
-        y_window = self.gui.window.winfo_y()
-        width_window = self.gui.window.winfo_width()
-        height_window = self.gui.window.winfo_height()
-        popup.iconbitmap("Icon_Calculator_16x16.ico")
-        popup.title("Hinweis")
-        #Size of popup
-        w = 200
-        h = 100
+   #def test(self):
+   #    popup = tk.Toplevel(self.gui.window)
+   #    popup.transient(self.gui.window)
+   #    popup.grab_set()
+   #    popup.resizable(False, False)
+   #    x_window = self.gui.window.winfo_x()
+   #    y_window = self.gui.window.winfo_y()
+   #    width_window = self.gui.window.winfo_width()
+   #    height_window = self.gui.window.winfo_height()
+   #    popup.iconbitmap("Icon_Calculator_16x16.ico")
+   #    popup.title("Hinweis")
+   #    #Size of popup
+   #    w = 200
+   #    h = 100
 
-        #Calculating the middle point of window
-        x_popup = x_window + (width_window - w) // 2
-        y_popup = y_window + (height_window - h) // 2
+   #    #Calculating the middle point of window
+   #    x_popup = x_window + (width_window - w) // 2
+   #    y_popup = y_window + (height_window - h) // 2
 
-        popup.geometry(f"{w}x{h}+{x_popup}+{y_popup}")
+   #    popup.geometry(f"{w}x{h}+{x_popup}+{y_popup}")
 
 
     def over_8_numbers(self, a):
@@ -309,7 +303,51 @@ class Logic():
         if not self.gui.entry_at_field_one.get(): #Field 2
             self.gui.number2.set(str(self.gui.number2.get())[:-1])
 
+    def history(self, n1, n2, op, r):
+        if r == "":
+            return
+        self.history_list.append([n1, n2, op, "=", r])
+        print(self.history_list)
 
 
-            
+
+    def over_8_numbers(self):
+        x = f"History"
+        popup = tk.Toplevel(self.gui.window)
+        popup.transient(self.gui.window)
+        popup.grab_set()
+        popup.resizable(False, False)
+        x_window = self.gui.window.winfo_x()
+        y_window = self.gui.window.winfo_y()
+        width_window = self.gui.window.winfo_width()
+        height_window = self.gui.window.winfo_height()
+        popup.iconbitmap("Icon_Calculator_16x16.ico")
+        popup.title(x)
+
+        #Size of popup
+        w = 390
+        h = 190
+
+        #Calculating the middle point of window
+        x_popup = x_window + (width_window - w) // 2
+        y_popup = y_window + (height_window - h) // 2
+
+        popup.geometry(f"{w}x{h}+{x_popup}+{y_popup}")
+
+        popup.columnconfigure(0, weight=1)
+        popup.rowconfigure(0, weight=1)
+
+        
+
+        self.warning_label = ttk.Label(popup, anchor="center", justify="center") 
+        self.warning_label.grid(row=0, column=0)
+        self.warning = tk.StringVar()
+        self.warning.set("To keep the design simple, the maximum number of digits is set to 8. \n It seems you wanted to go far and beyond. \n Dont. :)")
+        self.warning_label.configure(textvariable=self.warning)
+        self.warning_label.grid(row=0, column=0)
+
+
+
+
+
 
