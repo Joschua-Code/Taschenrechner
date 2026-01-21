@@ -311,38 +311,39 @@ class Logic():
 
 
 
-    def over_8_numbers(self):
+    def history_gui(self):
         x = f"History"
-        popup = tk.Toplevel(self.gui.window)
-        popup.transient(self.gui.window)
-        popup.grab_set()
-        popup.resizable(False, False)
+        history_popup = tk.Toplevel(self.gui.window)
+        history_popup.transient(self.gui.window)
+        history_popup.grab_set()
+        history_popup.resizable(False, False)
         x_window = self.gui.window.winfo_x()
         y_window = self.gui.window.winfo_y()
         width_window = self.gui.window.winfo_width()
         height_window = self.gui.window.winfo_height()
-        popup.iconbitmap("Icon_Calculator_16x16.ico")
-        popup.title(x)
+        history_popup.iconbitmap("Icon_Calculator_16x16.ico")
+        history_popup.title(x)
 
         #Size of popup
         w = 390
         h = 190
 
         #Calculating the middle point of window
-        x_popup = x_window + (width_window - w) // 2
-        y_popup = y_window + (height_window - h) // 2
+        x_history_popup = x_window + (width_window - w) // 2
+        y_history_popup = y_window + (height_window - h) // 2
 
-        popup.geometry(f"{w}x{h}+{x_popup}+{y_popup}")
+        history_popup.geometry(f"{w}x{h}+{x_history_popup}+{y_history_popup}")
 
-        popup.columnconfigure(0, weight=1)
-        popup.rowconfigure(0, weight=1)
-
+        history_popup.columnconfigure(0, weight=1)
+        history_popup.rowconfigure(0, weight=1)
         
+        for i in self.history_list():
+            i = ttk.Label()
 
-        self.warning_label = ttk.Label(popup, anchor="center", justify="center") 
+        self.warning_label = ttk.Label(history_popup, anchor="center", justify="center") 
         self.warning_label.grid(row=0, column=0)
         self.warning = tk.StringVar()
-        self.warning.set("To keep the design simple, the maximum number of digits is set to 8. \n It seems you wanted to go far and beyond. \n Dont. :)")
+        self.warning.set("")
         self.warning_label.configure(textvariable=self.warning)
         self.warning_label.grid(row=0, column=0)
 
