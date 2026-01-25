@@ -334,19 +334,15 @@ class Logic():
 
         history_popup.geometry(f"{w}x{h}+{x_history_popup}+{y_history_popup}")
 
-        #history_popup.columnconfigure(0, weight=1)
-        #history_popup.rowconfigure(0, weight=1)
+        history_popup.columnconfigure(0, weight=1)
+        history_popup.rowconfigure(0, weight=1)
         
-        for row, calculation in enumerate(self.history_list):
-            ttk.Label(history_popup, text=calculation).grid(row=row,column=0)
-
-        self.warning_label = ttk.Label(history_popup, anchor="center", justify="center") 
-        self.warning_label.grid(row=0, column=0)
-        self.warning = tk.StringVar()
-        self.warning.set("")
-        self.warning_label.configure(textvariable=self.warning)
-        self.warning_label.grid(row=0, column=0)
-
+        for row, (n1, op, n2, eq, r) in enumerate(self.history_list):
+            temp = f"Calculation {row + 1}:     {n1} {op} {n2} {eq} {r}"
+            ttk.Label(history_popup, text=(temp), anchor="w").grid(row=row,column=0, sticky="ew")
+            history_popup.columnconfigure(0, weight=1)
+            history_popup.columnconfigure(1, weight=1)
+            history_popup.rowconfigure(row, weight=1)
 
 
 

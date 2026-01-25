@@ -11,7 +11,6 @@ class GUI:
     def __init__(self):
         
         self.initialize_window_and_variables()
-
         self.logic = c_02_logic.Logic(self)
 
         self.window.mainloop()
@@ -117,7 +116,7 @@ class GUI:
 
         self.history_button = ttk.Button(
             self.window, 
-            text="WIP", #☰ Symbol for possible HistoryButton
+            text="☰", #☰ Symbol for possible HistoryButton
             command=lambda: self.logic.history_gui()  
             )
         self.history_button.grid(row=3, column=2)
