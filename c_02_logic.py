@@ -303,10 +303,10 @@ class Logic():
         if not self.gui.entry_at_field_one.get(): #Field 2
             self.gui.number2.set(str(self.gui.number2.get())[:-1])
 
-    def history(self, n1, n2, op, r):
+    def history(self, n1, op, n2, r):
         if r == "":
             return
-        self.history_list.append([n1, n2, op, "=", r])
+        self.history_list.append([n1, op, n2, "=", r])
         print(self.history_list)
 
 
@@ -334,11 +334,11 @@ class Logic():
 
         history_popup.geometry(f"{w}x{h}+{x_history_popup}+{y_history_popup}")
 
-        history_popup.columnconfigure(0, weight=1)
-        history_popup.rowconfigure(0, weight=1)
+        #history_popup.columnconfigure(0, weight=1)
+        #history_popup.rowconfigure(0, weight=1)
         
-        for i in self.history_list():
-            i = ttk.Label()
+        for row, calculation in enumerate(self.history_list):
+            ttk.Label(history_popup, text=calculation).grid(row=row,column=0)
 
         self.warning_label = ttk.Label(history_popup, anchor="center", justify="center") 
         self.warning_label.grid(row=0, column=0)

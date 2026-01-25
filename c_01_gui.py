@@ -118,7 +118,7 @@ class GUI:
         self.history_button = ttk.Button(
             self.window, 
             text="WIP", #☰ Symbol for possible HistoryButton
-            command=lambda: self.logic.over_8_numbers()
+            command=lambda: self.logic.history_gui()  
             )
         self.history_button.grid(row=3, column=2)
 
