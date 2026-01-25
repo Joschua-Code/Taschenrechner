@@ -4,13 +4,15 @@ x = None
 
 
 
+x = list()
+
+x.append([1,2,3])
+x.append([4,5,6])
 
 
 
-
-
-
-
+for i in x:
+    print(i)
 
 
 
