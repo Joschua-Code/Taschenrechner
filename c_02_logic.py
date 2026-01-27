@@ -337,12 +337,16 @@ class Logic():
         history_popup.columnconfigure(0, weight=1)
         history_popup.rowconfigure(0, weight=1)
         
-        for row, (n1, op, n2, eq, r) in enumerate(self.history_list):
-            temp = f"Calculation {row + 1}:     {n1} {op} {n2} {eq} {r}"
-            ttk.Label(history_popup, text=(temp), anchor="w").grid(row=row,column=0, sticky="ew")
-            history_popup.columnconfigure(0, weight=1)
-            history_popup.columnconfigure(1, weight=1)
-            history_popup.rowconfigure(row, weight=1)
+        if not self.history_list:
+            ttk.Label(history_popup, text="History is empty. \nCreate one. :)", anchor="center", justify="center").grid(row=0, column=0, sticky="ew")
+            print("At this point History should have gotten the Label added that History is empty.")
+        else:
+            for row, (n1, op, n2, eq, r) in enumerate(self.history_list):
+                temp = f"Calculation {row + 1}:     {n1} {op} {n2} {eq} {r}"
+                ttk.Label(history_popup, text=(temp), anchor="w").grid(row=row,padx=(60,0), column=0, sticky="ew")
+                history_popup.rowconfigure(row, weight=1)
+        history_popup.columnconfigure(0, weight=1)
+        
 
 
 
