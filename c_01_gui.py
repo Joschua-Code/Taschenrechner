@@ -3,7 +3,7 @@ from tkinter import ttk
 import sys
 import c_02_logic
 from decimal import Decimal
-from c_03_utils import as_decimal
+from c_03_utils import as_decimal, resource_path
 
 
 
@@ -23,7 +23,7 @@ class GUI:
         self.window.minsize(width=250,height=300)
         self.window.configure(padx= 50, pady=50)
         self.window.resizable(False, False)
-        self.window.iconbitmap("Icon_Calculator_16x16.ico")
+        self.window.iconbitmap(resource_path("Icon_Calculator_16x16.ico"))
 
 
         #Resultframe

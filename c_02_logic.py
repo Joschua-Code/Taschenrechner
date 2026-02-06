@@ -1,7 +1,7 @@
 from decimal import Decimal
 import tkinter as tk
 from tkinter import ttk
-from c_03_utils import as_decimal
+from c_03_utils import as_decimal, resource_path
 
 
 
@@ -208,28 +208,6 @@ class Logic():
                 return
 
 
-   #def test(self):
-   #    popup = tk.Toplevel(self.gui.window)
-   #    popup.transient(self.gui.window)
-   #    popup.grab_set()
-   #    popup.resizable(False, False)
-   #    x_window = self.gui.window.winfo_x()
-   #    y_window = self.gui.window.winfo_y()
-   #    width_window = self.gui.window.winfo_width()
-   #    height_window = self.gui.window.winfo_height()
-   #    popup.iconbitmap("Icon_Calculator_16x16.ico")
-   #    popup.title("Hinweis")
-   #    #Size of popup
-   #    w = 200
-   #    h = 100
-
-   #    #Calculating the middle point of window
-   #    x_popup = x_window + (width_window - w) // 2
-   #    y_popup = y_window + (height_window - h) // 2
-
-   #    popup.geometry(f"{w}x{h}+{x_popup}+{y_popup}")
-
-
     def over_8_numbers(self, a):
         x = f"Limit for {a} reached"
         popup = tk.Toplevel(self.gui.window)
@@ -240,7 +218,7 @@ class Logic():
         y_window = self.gui.window.winfo_y()
         width_window = self.gui.window.winfo_width()
         height_window = self.gui.window.winfo_height()
-        popup.iconbitmap("Icon_Calculator_16x16.ico")
+        popup.iconbitmap(resource_path("Icon_Calculator_16x16.ico"))
         popup.title(x)
 
         #Size of popup
@@ -321,7 +299,7 @@ class Logic():
         y_window = self.gui.window.winfo_y()
         width_window = self.gui.window.winfo_width()
         height_window = self.gui.window.winfo_height()
-        history_popup.iconbitmap("Icon_Calculator_16x16.ico")
+        history_popup.iconbitmap(resource_path("Icon_Calculator_16x16.ico"))
         history_popup.title(x)
 
         #Size of popup
