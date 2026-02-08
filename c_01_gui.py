@@ -6,7 +6,6 @@ from decimal import Decimal
 from c_03_utils import as_decimal, resource_path
 
 
-
 class GUI:
     def __init__(self):
         
@@ -18,9 +17,10 @@ class GUI:
     def initialize_window_and_variables(self):
         #Window & Windowsettings
         self.window = tk.Tk()
+        self.w = self.window.winfo_screenwidth()
+        self.b = self.window.winfo_screenheight()
         self.window.title("Simple Calculator")
-        self.window.geometry("400x200")
-        self.window.minsize(width=250,height=300)
+        self.window.geometry(f"400x300+{self.w // 2 - 200}+{self.b // 2 - 150}")
         self.window.configure(padx= 50, pady=50)
         self.window.resizable(False, False)
         self.window.iconbitmap(resource_path("Icon_Calculator_16x16.ico"))
