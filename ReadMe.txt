@@ -1,4 +1,4 @@
-Its a calculator. No need to explain much. :)
+It's a calculator. No need to explain much. :)
 
 ## Build (Windows)
 pip install -U pyinstaller
