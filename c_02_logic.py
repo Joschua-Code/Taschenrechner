@@ -6,17 +6,13 @@ from c_03_utils import as_decimal, resource_path
 
 
 class Logic():
-
-
     def __init__(self, gui_instance):
-        self.gui = gui_instance #Here the reference to the instance of the class gui gets saved
+        self.gui = gui_instance 
         self.history_list = list()
 
 
     def calculate(self):
-
         if self.gui.operator.get() != "" and self.gui.number2.get() != "":
-
             if self.gui.operator.get() == "+":
                 result = f"{Decimal(self.gui.number1.get()) + Decimal(self.gui.number2.get())}"
                 if self.calculate_result_check(result):
@@ -75,7 +71,7 @@ class Logic():
             return False
 
         
-    #Clears the result window except it keeps the result value and puts it in the number 1 frame
+    #Clears the result window but keeps the result value and puts it in the number 1 frame
     def next_calculation(self):
         r = Decimal(self.gui.result.get())
         _, _, r_comma_position = self.getthelength(r)
@@ -126,7 +122,7 @@ class Logic():
 
 
     def change_plus_minus(self):
-        if self.gui.result.get() != "": #Checks if Result is Null/Empty if not it blocks entering a Number after already calculating
+        if self.gui.result.get() != "":
             return
         
         if self.gui.entry_at_field_one.get():
@@ -151,12 +147,11 @@ class Logic():
 
 
     def enter_number(self, x):
-        if self.gui.result.get() != "": #Checks if Result is Null if not it blocks entering a Number after already calculating
+        if self.gui.result.get() != "":
             return
         
         if self.gui.entry_at_field_one.get():                               # --- For Number 1 ---
-
-            if self.gui.number1.get() == "": #No number assigned so far
+            if self.gui.number1.get() == "":
                 self.gui.number1.set(str(x))
 
             else:
@@ -181,7 +176,6 @@ class Logic():
                 return
             
         else:                                                               # --- For Number 2 ---
-
             if self.gui.number2.get() == "": #No number assigned so far
                 print(f"[enter_number] The Value for x that is to be inserted into Number2 is: {x}")
                 self.gui.number2.set(str(x))
@@ -243,7 +237,6 @@ class Logic():
 
 
     def getthelength(self, x) -> tuple[int, int, int]:  
-
         x = str(x)
         x = x.removeprefix("-")
         full_numbers, _, fractional = x.partition(".")
@@ -255,15 +248,14 @@ class Logic():
         
       
     def is_length_under_9(self, x) -> bool:
-
         total_length, _, _ = self.getthelength(x)
 
         return total_length <= 8
 
 
     def my_round(self, result):
-
         _, full_numbers_length, _ = self.getthelength(result)
+
         if full_numbers_length > 6:
             return "Too Long"
 
@@ -271,6 +263,7 @@ class Logic():
 
         return (str(round(Decimal(result), to_reduce_number)))
     
+
     def backspace(self):
         if self.gui.result.get() != "":
             return
@@ -281,36 +274,36 @@ class Logic():
         if not self.gui.entry_at_field_one.get(): #Field 2
             self.gui.number2.set(str(self.gui.number2.get())[:-1])
 
+
     def history(self, n1, op, n2, r):
         if r == "":
             return
-        self.history_list.append([n1, op, n2, "=", r])
-        print(self.history_list)
 
+        self.history_list.append([n1, op, n2, "=", r])
 
 
     def history_gui(self):
-        x = f"History"
         history_popup = tk.Toplevel(self.gui.window)
         history_popup.transient(self.gui.window)
         history_popup.grab_set()
         history_popup.resizable(False, False)
+        history_popup.iconbitmap(resource_path("Icon_Calculator_16x16.ico"))
+        history_popup.title("History")
+
         x_window = self.gui.window.winfo_x()
         y_window = self.gui.window.winfo_y()
         width_window = self.gui.window.winfo_width()
         height_window = self.gui.window.winfo_height()
-        history_popup.iconbitmap(resource_path("Icon_Calculator_16x16.ico"))
-        history_popup.title(x)
-
+        
         #Size of popup
-        w = 390
-        h = 190
+        width_popup = 390
+        height_popup = 190
 
         #Calculating the middle point of window
-        x_history_popup = x_window + (width_window - w) // 2
-        y_history_popup = y_window + (height_window - h) // 2
+        x_history_popup = x_window + (width_window - width_popup) // 2
+        y_history_popup = y_window + (height_window - height_popup) // 2
 
-        history_popup.geometry(f"{w}x{h}+{x_history_popup}+{y_history_popup}")
+        history_popup.geometry(f"{width_popup}x{height_popup}+{x_history_popup}+{y_history_popup}")
 
         history_popup.columnconfigure(0, weight=1)
         history_popup.rowconfigure(0, weight=1)
@@ -318,12 +311,12 @@ class Logic():
         if not self.history_list:
             ttk.Label(history_popup, text="History is empty. \nCreate one. :)", anchor="center", justify="center").grid(row=0, column=0, sticky="ew")
             print("At this point History should have gotten the Label added that History is empty.")
+
         else:
             for row, (n1, op, n2, eq, r) in enumerate(self.history_list):
                 temp = f"Calculation {row + 1}:     {n1} {op} {n2} {eq} {r}"
                 ttk.Label(history_popup, text=(temp), anchor="w").grid(row=row,padx=(60,0), column=0, sticky="ew")
                 history_popup.rowconfigure(row, weight=1)
-        history_popup.columnconfigure(0, weight=1)
         
 
 

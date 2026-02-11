@@ -8,25 +8,23 @@ from c_03_utils import as_decimal, resource_path
 
 class GUI:
     def __init__(self):
-        
         self.initialize_window_and_variables()
         self.logic = c_02_logic.Logic(self)
-
         self.window.mainloop()
 
     def initialize_window_and_variables(self):
-        #Window & Windowsettings
+        # Window & Windowsettings
         self.window = tk.Tk()
         self.w = self.window.winfo_screenwidth()
         self.b = self.window.winfo_screenheight()
-        self.window.title("Simple Calculator")
+        self.window.title("Calculator")
         self.window.geometry(f"400x300+{self.w // 2 - 200}+{self.b // 2 - 150}")
         self.window.configure(padx= 50, pady=50)
         self.window.resizable(False, False)
         self.window.iconbitmap(resource_path("Icon_Calculator_16x16.ico"))
 
 
-        #Resultframe
+        # Resultframe
         self.ergebnisfenster = tk.Frame(self.window)
         self.ergebnisfenster.grid(row=0, column=0, columnspan=4, sticky="ew")
         self.ergebnisfenster.grid_columnconfigure((0,1,2,3,4), weight=1, uniform="cols")
@@ -37,56 +35,44 @@ class GUI:
 
 
         #   Number 1 
-
         #       Variable
         self.number1 = tk.StringVar(value="")
-
         #       Commaposition
         self.number1_comma_position = 0
-
         #       Label
         self.number1_label = ttk.Label(self.ergebnisfenster, textvariable=self.number1) 
         self.number1_label.grid(row=0, column=0)
 
 
         #   Operator
-
         #       Variable
         self.operator = tk.StringVar(value="")
-
         #       Label
         self.operator_label = ttk.Label(self.ergebnisfenster, textvariable=self.operator)
         self.operator_label.grid(row=0, column=1)
 
 
         #   Number 2
-
         #       Variable
         self.number2 = tk.StringVar(value="")
-
         #       Commaposition
         self.number2_comma_position = 0
-
         #       Label
         self.number2_label = ttk.Label(self.ergebnisfenster, textvariable=self.number2)
         self.number2_label.grid(row=0, column=2)
 
         
         #   Equal
-
         #       Variable
         self.equal = tk.StringVar(value="")
-
         #       Label
         self.equal_label = ttk.Label(self.ergebnisfenster, textvariable=self.equal)
         self.equal_label.grid(row=0, column=3)
 
 
         #   Result
-
         #       Variable
         self.result = tk.StringVar(value="")
-
         #       Label
         self.result_label = ttk.Label(self.ergebnisfenster, textvariable=self.result)
         self.result_label.grid(row=0, column=4)
@@ -116,7 +102,7 @@ class GUI:
 
         self.history_button = ttk.Button(
             self.window, 
-            text="☰", #☰ Symbol for possible HistoryButton
+            text="☰",
             command=lambda: self.logic.history_gui()  
             )
         self.history_button.grid(row=3, column=2)
@@ -220,8 +206,6 @@ class GUI:
             
             case "BackSpace":
                 self.logic.backspace()
-                
-
                     
         match event.char:
             case "+":
