@@ -1,8 +1,8 @@
 #Current To-Do
-#Checking if everything is commented nice
+#
 
 #To-Do
-#Checking if everything is commented nice
+#
 
 
 #Known Bugs
@@ -18,4 +18,4 @@
 
 
 
-#Pyinstaller_command - py -m PyInstaller --onefile --windowed --distpath . --add-data Icon_Calculator_16x16.ico;. --icon=Icon_Calculator_16x16.ico c_00_main.py -n Taschenrechner
+#Pyinstaller_command:  py -m PyInstaller --onefile --windowed --distpath . --add-data "Icon_Calculator_16x16.ico;." --icon=Icon_Calculator_16x16.ico c_00_main.py -n Calculator
